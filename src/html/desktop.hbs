@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {{> ./components/metas }}
+    {{> ./components/styles }}
+
+    <title>Desktop</title>
+</head>
+<body>
+    <div class="w-100">
+        {{> ./components/header }}
+    </div>
+
+    <main id="main-content">
+        <aside>
+            {{> ./components/sidebar action=htmlWebpackPlugin.options.title }}
+        </aside>
+
+        <div id="body">
+            {{> ./components/tabs/desktop.hbs }}
+            {{> ./components/tabs/challenges.hbs }}
+            {{> ./components/tabs/setting.hbs }}
+        </div>
+    </main>
+</body>
+</html>

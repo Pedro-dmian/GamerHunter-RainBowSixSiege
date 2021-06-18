@@ -1,0 +1,42 @@
+body {
+    overflow-x: hidden;
+    background-color: $background_window;
+    color: $white;
+}
+
+
+#body {
+    display: block;
+    position: relative;
+    width: 100%;
+}
+
+#main-content {
+    display: flex;
+}
+
+.bg-gamerhunter-secundary {
+    background-color: $gamerhunter-secundary;
+}
+
+.color-gamerhunter-secundary {
+    color: $gamerhunter-secundary;
+}
+
+.bg-gamerhunter {
+    background-color: $gamerhunter;
+}
+
+.color-gamerhunter {
+    color: $gamerhunter;
+}
+
+.font-bold {
+    font-weight: bold;
+}
+
+.bg-transparent {
+    background-color: transparent;
+}
+
+@import "./forms";

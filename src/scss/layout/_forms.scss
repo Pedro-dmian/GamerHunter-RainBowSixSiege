@@ -1,0 +1,23 @@
+.form-group {
+    margin-bottom: 15px;
+
+    label {
+        display: block;
+        padding: 5px;
+    }
+
+    input {
+        background-color: $gamerhunter-secundary;
+        border: none;
+        border-radius: 3px;
+    }
+
+    .form-control:focus {
+        background-color: $gamerhunter-secundary;
+    }
+
+    span.alert-input {
+        display: block;
+        padding: 5px;
+    }
+}

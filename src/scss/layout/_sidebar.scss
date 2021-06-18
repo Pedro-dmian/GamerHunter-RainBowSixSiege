@@ -1,0 +1,50 @@
+aside {
+    min-width: 100px;
+}
+
+.aside {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 90px;
+    z-index: 98;
+    border-right: 1px solid $aside_border_color;
+    // -webkit-box-shadow: 5px 0px 10px rgba(70, 78, 95, 0.05);
+    // box-shadow: 5px 0px 10px rgba(70, 78, 95, 0.05);
+    background-color: $aside_color;
+    height: calc(100% - 30px);
+    top: 30px;
+    
+    .aside-nav {
+        .nav {
+            .nav-item {
+                a.active {
+                    background-color: $gamerhunter;
+                    i {
+                        color: $white;
+                    }
+
+                    &:hover {
+                        i {
+                            color: $gamerhunter;
+                        }
+                    }
+                }
+                a {
+                    background-color: $gamerhunter-secundary;
+                    max-height: 45px;
+                    &:hover {
+                        i {
+                            color: $gamerhunter;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+.aside .aside-menu.ps > .ps__rail-y {
+    right: 4px;
+}
+  
