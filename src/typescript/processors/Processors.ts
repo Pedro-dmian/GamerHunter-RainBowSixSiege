@@ -1,4 +1,3 @@
-//import * as request from 'request'
 // ? Libs
 import axios, { AxiosRequestConfig, Method, AxiosError, AxiosResponse } from 'axios'
 
@@ -6,6 +5,7 @@ import axios, { AxiosRequestConfig, Method, AxiosError, AxiosResponse } from 'ax
 import { webService } from '../constants/consts'
 import { Timings } from '../constants/timings'
 
+import { Session } from '../utils/Session'
 
 export class Processors {
 
@@ -14,17 +14,15 @@ export class Processors {
     private readonly API_GATEWAY: string = webService.api
     private readonly API_PLATFORM: string = webService.platform
 
-    public getAPI(path: string, method: Method = 'get', params: any = {}, attempts: number): Promise<AxiosResponse> {
+    public getAPI(path: string, method: Method = 'get', params: any = {}, attempts: number = 1): Promise<AxiosResponse> {
         let that = this
 
         return new Promise(async (resolve, reject) => {
-            const headers = { 
-                Authorization: `Bearer ${'token'}`,
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
-                'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token',
-                'Content-Type': 'application/json', 
-                'X-Requested-With': 'XMLHttpRequest'
+            const token = new Session().getItem('token') || null
+
+            const headers = {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json'
             } as AxiosRequestConfig
 
             let axiosConfig: AxiosRequestConfig = {
@@ -38,7 +36,7 @@ export class Processors {
                 delete axiosConfig.data
             }
 
-            if(true) {
+            if(!token) {
                 delete axiosConfig.headers.Authorization
             }
 
@@ -50,15 +48,6 @@ export class Processors {
                 reject(error)
             }
         })
-
-        /*if (attempts < Processors.MAX_ATTEMPTS) {
-            
-        } else {
-            debugger
-            setTimeout(() => {
-                that.getAPI(path, method,  params, attempts + 1)
-            }, Timings.MINUTE * Timings.TIMEOUT_SECOND )
-        }*/
     }
 
     private buildURL(path: string): string {

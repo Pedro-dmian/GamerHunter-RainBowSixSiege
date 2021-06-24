@@ -26,20 +26,20 @@ export class Utils {
         return toastr[map.type](map.message, map.title, map.optionsOverride)
     }
 
-    public validarExistanceConenteElement(formId: string = '') : HTMLElement {
-        const element: HTMLElement = document.getElementById(formId)
+    public validarExistanceContentElement(id: string = '') : HTMLElement {
+        const element: HTMLElement = document.getElementById(id)
 
-        if(!formId || !element) {
+        if(!id || !element) {
             this.toastr({ type: 'warning', message: 'El id del formulario esta vacío', iconClass: '' })
 
-            return 
+            return null
         }
 
         return element
     }
 
     public submitForm(formId: string = '', callback: any) : any {
-        const element = this.validarExistanceConenteElement(formId)
+        const element = this.validarExistanceContentElement(formId)
 
         if(!element) {
             return
@@ -48,8 +48,18 @@ export class Utils {
         element.addEventListener('submit', callback)
     }
 
+    public submitEvent(id: string = '', callback: any) : any {
+        const element = this.validarExistanceContentElement(id)
+
+        if(!element) {
+            return
+        }
+
+        element.addEventListener('click', callback)
+    }
+
     public validateForm(formId: string = '') : boolean {
-        const element: any = this.validarExistanceConenteElement(formId)
+        const element: any = this.validarExistanceContentElement(formId)
 
         if(!element) {
             return
@@ -88,5 +98,71 @@ export class Utils {
         return stepForm
     }
 
+    disabledButtonAndLoader(event, loader: boolean = true, spinnerColor: string = 'dark', messageAlert: string = '', clear: boolean = false, alertColor: string = 'danger', typeToastr: ToastrType = 'info') {
+        if(!event) {
+            this.toastr({ type: 'warning', message: 'El botton del formulario no esta completo o no esta definido', iconClass: '' })
+        }
 
+        if(loader) {
+            if(event.submitter) {
+                event.submitter.setAttribute('disabled', true)
+
+                this.addClassContent(event.submitter.id, ['spinner', `spinner-${spinnerColor || 'dark'}`, 'spinner-right'])
+            } else if(event.srcElement) {
+                event.srcElement.setAttribute('disabled', true)
+
+                this.addClassContent(event.srcElement.id, ['spinner', `spinner-${spinnerColor || 'dark'}`, 'spinner-right'])
+            }
+        } else {
+            if(event.submitter) { 
+                event.submitter.removeAttribute('disabled')
+
+                this.addClassContent(event.submitter.id, [], ['spinner', `spinner-${spinnerColor || 'dark'}`, 'spinner-right'])
+            }  else if(event.srcElement) {
+                event.srcElement.removeAttribute('disabled')
+
+                this.addClassContent(event.srcElement.id, [], ['spinner', `spinner-${spinnerColor || 'dark'}`, 'spinner-right'])
+            }
+        }
+
+        this.setErrorForm(messageAlert, clear, alertColor, typeToastr)
+    }
+
+    setErrorForm(messageAlert: string = '', clear: boolean = false, alertColor: string = 'danger', typeToastr: ToastrType = 'info') : HTMLElement{
+        let element = document.getElementById('errorContent')
+        
+        if(clear) {
+            element.innerHTML = ''    
+        } else {
+            element.innerHTML = `<div id="alertForm" class="alert alert-${alertColor}">${ messageAlert }</div>`
+
+            this.toastr({ type: typeToastr, message: messageAlert, iconClass: '' })
+        }
+
+        return element
+    }
+
+    addClassContent(id: string, classValue: any, classRemove: any = null) {
+        let element: HTMLElement = document.getElementById(id)
+
+        if(!this.validarExistanceContentElement(id)) {
+            return null
+        }
+
+        if (!(classValue instanceof Array)) {
+            classValue = [classValue]
+        }
+
+        if(classRemove != null) {
+            if (!(classRemove instanceof Array)) {
+                classRemove = [classRemove]
+            }
+
+            classRemove.forEach(itemClass => element.classList.remove(itemClass))
+        }
+
+        classValue.forEach(itemClass => element.classList.add(itemClass))
+
+        return element 
+    }
 }

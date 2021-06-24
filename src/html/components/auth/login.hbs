@@ -1,0 +1,44 @@
+<div class="row d-flex justify-content-center align-items-center h-100 mt-15" id="ContentComponentLogin">
+    <div class="col-8 col-sm-9 col-md-5">
+        <div class="card card-custom bg-transparent p-0">
+            <div class="card-body text-white p-0">
+                {{!-- LOGIN --}}
+                <form method="post" id="formLogin" name="formLogin">
+                    <div class="row">
+                        <div class="col-12 d-flex justify-content-center mb-5">
+                            <img alt="Logo" src="./assets/img/gamerHunter.png" class="max-h-70px">
+                        </div>
+                    </div>
+
+                    <div id="errorContent"></div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <input type="email" class="form-control" placeholder="Correo" name="email" required>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <input type="password" class="form-control" placeholder="Contraseña" name="password" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12 d-flex justify-content-center">
+                            <div class="kt-login__actions">
+                                <button type="submit" id="login_submit" class="btn btn-warning btn-elevate kt-login__btn-primary">
+                                    Iniciar sesión
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                {{!-- END::LOGIN --}}
+
+            </div>
+        </div>
+    </div>
+</div>

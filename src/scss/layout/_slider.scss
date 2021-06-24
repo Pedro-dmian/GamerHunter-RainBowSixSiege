@@ -1,0 +1,254 @@
+.owl-carousel:after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 8%;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    margin-left: 0;
+    pointer-events: none;
+    background-size: 100% auto;
+  }
+  .owl-item {
+    -webkit-backface-visibility: hidden;
+    -webkit-transform: translate(0) scale(1.0, 1.0);
+  }
+  .item {
+    opacity: 0.4;
+    transition: .4s ease all;
+    transform: scale(.6);
+  }
+  .item img{
+    display: block;
+    min-width: 100%;
+    width: auto;
+    height: auto;
+  }
+  .active .item {
+    display: block;
+    width: 100%;
+    height: auto;
+    opacity: 1;
+    transform: scale(1);
+    max-height: 680px !important;
+  }
+  
+  /* content and cta */
+  .inner {
+    position: absolute;
+    bottom: 20%;
+    left: 0;
+    right: 0;
+    text-align: center;
+  }
+  /* END CTA Button*/
+  
+  /* Title Animation */
+  .reveal-text,
+  .reveal-text:after {
+    -webkit-animation-delay: 0.5s;
+            animation-delay: 0.5s;
+    -webkit-animation-duration: 600ms;
+            animation-duration: 600ms;
+    -webkit-animation-fill-mode: both;
+            animation-fill-mode: both;
+    -webkit-animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+            animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
+  .reveal-text {
+    position: relative;
+    -webkit-user-select: none;
+            user-select: none;
+    color:#ffe221;
+    text-shadow: 1px 1px #000000;
+    white-space: nowrap;
+  }
+  .reveal-text:after {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #8ce2ea;
+    -webkit-transform: scaleX(0);
+            transform: scaleX(0);
+    -webkit-transform-origin: 0 50%;
+            transform-origin: 0 50%;
+    pointer-events: none;
+  }
+  .active .reveal-text{
+      -webkit-animation-name: reveal-text;
+            animation-name: reveal-text;
+  }
+  .active .reveal-text:after {
+      -webkit-animation-name: revealer-text;
+            animation-name: revealer-text;
+  }
+  /* Before animation */
+  @-webkit-keyframes reveal-text {
+    from {
+      -webkit-clip-path: inset(0 100% 0 0);
+              clip-path: inset(0 100% 0 0);
+    }
+    to {
+      -webkit-clip-path: inset(0 0 0 0);
+              clip-path: inset(0 0 0 0);
+    }
+  }
+  @keyframes reveal-text {
+    from {
+      -webkit-clip-path: inset(0 100% 0 0);
+              clip-path: inset(0 100% 0 0);
+    }
+    to {
+      -webkit-clip-path: inset(0 0 0 0);
+              clip-path: inset(0 0 0 0);
+    }
+  }
+  
+  /* After animation */
+  @-webkit-keyframes revealer-text {
+    0%, 50% {
+      -webkit-transform-origin: 0 50%;
+              transform-origin: 0 50%;
+    }
+    60%, 100% {
+      -webkit-transform-origin: 100% 50%;
+              transform-origin: 100% 50%;
+    }
+    50% {
+      -webkit-transform: scaleX(1);
+              transform: scaleX(1);
+    }
+    60% {
+      -webkit-transform: scaleX(1);
+              transform: scaleX(1);
+    }
+    100% {
+      -webkit-transform: scaleX(0);
+              transform: scaleX(0);
+    }
+  }
+  @keyframes revealer-text {
+    0%, 50% {
+      -webkit-transform-origin: 0 50%;
+              transform-origin: 0 50%;
+    }
+    60%, 100% {
+      -webkit-transform-origin: 100% 50%;
+              transform-origin: 100% 50%;
+    }
+    50% {
+      -webkit-transform: scaleX(1);
+              transform: scaleX(1);
+    }
+    60% {
+      -webkit-transform: scaleX(1);
+              transform: scaleX(1);
+    }
+    100% {
+      -webkit-transform: scaleX(0);
+              transform: scaleX(0);
+    }
+  }
+  /* Title Animation END */
+  
+  /* OWL-Carousel Navigation*/
+  .owl-nav div {
+    position: absolute;
+    top: 45%;
+    color: #cdcbcd;
+  }
+  .owl-nav i {
+    font-size: 52px;
+  }
+  .owl-nav .owl-prev {
+    left: 5% !important;
+  }
+  .owl-nav .owl-next {
+    right: 5% !important;;
+  }
+  .owl-prev:hover, .owl-next:hover{
+    text-shadow: 2px 2px #000000;
+    transform: translateX(10%);
+    -webkit-animation-timing-function: ease-in-out;
+    animation-timing-function: ease-in-out;
+  }
+  .owl-prev:hover{
+    text-shadow: -2px 2px #000000;
+    transform: translateX(-10%);
+  }
+  .owl-theme .owl-dots .owl-dot span{
+    width: 0;
+  }
+  .owl-dots {
+    text-align: center;
+    position: fixed;
+    margin-top: 10px;
+    width: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+  .owl-dot {
+    border-radius: 50px;
+    height: 10px;
+    width: 10px;
+    display: inline-block;
+    background: rgba(127,127,127, 0.5);
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+  .owl-dot.active {
+    background: rgba(127,127,127, 1);
+  }
+  /* END OWL-Carousel Navigation*/
+  
+  @media only screen and (max-width:768px) {
+    #full-width{
+      padding: 0;
+    }
+    .item{
+      transform: scale(0);
+    }
+    .item img{
+      height: 400px !important;
+    }
+    .active .item img{
+      max-height: 400px;
+    }
+  }
+  @media only screen and (max-width:420px) {
+    .item img{
+      height: 200px !important;
+    }
+    .active .item img{
+      max-height: 200px;
+    }
+  }
+
+.owl-nav {
+  position: absolute;
+  top: 50%;
+  left: 0%;
+  transform: translate(0%, -50%);
+  display: block;
+  width: 100%;
+  .owl-prev {
+    float: left;
+    background-color: $gamerhunter !important;
+    i {
+      color: $white;
+    }
+  }
+
+  .owl-next {
+    float: right;
+    background-color: $gamerhunter !important;
+    i {
+      color: $white;
+    }
+  }
+}

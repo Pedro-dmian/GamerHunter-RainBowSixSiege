@@ -1,9 +1,5 @@
 // ? Interfaces
 import { IMenu } from '../interfaces/IMenu.interface'
-
-// ? JQuery
-import * as $ from 'jquery'
-
 export class NavAction {
     private TapAction = ''
 
