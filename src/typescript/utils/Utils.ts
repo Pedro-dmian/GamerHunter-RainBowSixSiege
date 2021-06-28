@@ -1,6 +1,8 @@
 import * as toastr from 'toastr'
 import { isEmpty } from 'lodash'
 
+import { OWHotkeys } from '@overwolf/overwolf-api-ts'
+
 export class Utils {
     public getFormData($form: any) : any {
         var unindexed_array = $form.serializeArray()
@@ -125,21 +127,23 @@ export class Utils {
             }
         }
 
-        this.setErrorForm(messageAlert, clear, alertColor, typeToastr)
+        this.setErrorForm(messageAlert, clear, alertColor, typeToastr, (event?.target?.id || null))
     }
 
-    setErrorForm(messageAlert: string = '', clear: boolean = false, alertColor: string = 'danger', typeToastr: ToastrType = 'info') : HTMLElement{
-        let element = document.getElementById('errorContent')
-        
-        if(clear) {
-            element.innerHTML = ''    
-        } else {
-            element.innerHTML = `<div id="alertForm" class="alert alert-${alertColor}">${ messageAlert }</div>`
+    setErrorForm(messageAlert: string = '', clear: boolean = false, alertColor: string = 'danger', typeToastr: ToastrType = 'info', id: string = '') : any {
+        let element = document.querySelector(`#${id} > #errorContent`) || null
 
-            this.toastr({ type: typeToastr, message: messageAlert, iconClass: '' })
+        if(element) {
+            if(clear) {
+                element.innerHTML = ''    
+            } else {
+                element.innerHTML = `<div id="alertForm" class="alert alert-${alertColor}">${ messageAlert }</div>`
+    
+                this.toastr({ type: typeToastr, message: messageAlert, iconClass: '' })
+            }
+    
+            return element
         }
-
-        return element
     }
 
     addClassContent(id: string, classValue: any, classRemove: any = null) {
@@ -164,5 +168,11 @@ export class Utils {
         classValue.forEach(itemClass => element.classList.add(itemClass))
 
         return element 
+    }
+
+    openBrowser(url: string) {
+        if(!isEmpty(url)) {
+            overwolf.utils.openUrlInDefaultBrowser(url)
+        }
     }
 }

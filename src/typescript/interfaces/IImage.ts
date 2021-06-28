@@ -1,0 +1,34 @@
+export interface IImage {
+    active: number
+    available: number
+    banner_main: string
+    capacity_users: number
+    color_left: string
+    color_right: string
+    created_at: Date
+    date_draw: Date
+    description: string
+    description_product: string
+    expiration_date: Date
+    facebook: string
+    hashtag_event: String
+    id: 27
+    initial_date: Date
+    instagram: string
+    logo_url: string
+    name: string
+    name_product: string
+    quantity_clicks_social_networks: number
+    quantity_clicks_web_site: number
+    quantity_products: number
+    quantity_views: number
+    twitter: string
+    updated_at: string
+    url_draw: string
+    url_event: string
+    url_product: string
+    url_video_youtube: string
+    users_complete_event: number
+    web_page: string
+    youtube: string
+}

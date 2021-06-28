@@ -1,5 +1,12 @@
 .widget-1 {
     position: relative;
+    height: 100%;
+
+    .widget-1-body {
+        width: 100%;
+        display: block;
+    }
+
     .widget-1-opacity {
         background-color: rgba(0,0,0,0.7);
         position: absolute;
@@ -61,13 +68,65 @@
         align-items: center;
         flex-flow: row wrap;
         list-style: none;
+        li.active {
+            position: relative;
+            // &::before, &::after {
+            //     content: ' ';
+            //     animation: latido linear 3s infinite;
+            //     height: 98%;
+            //     width: 98%;
+
+            //     position:absolute;
+            //     top: 50%;
+            //     left: 50%;
+            //     transform:translate(-50%, -50%);
+            // }
+            // &::after {
+            //     animation-delay: -1.5s;
+            // }
+        }
+
         li {
-            width: 150px;
-            height: 200px;
+            width: 50px;
+            height: 50px;
+            background-color: $gamerhunter;
+            padding: 10px;
+            border-radius: 100%;
             img {
                 height: 100%;
                 object-fit: cover;
                 object-position: center center;
+            }
+
+            button {
+                position: absolute;
+                top: 0px;
+                left: 0px;
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
+}
+
+.widget-3 {
+    position: relative;
+    background: none;
+    padding: 0px;
+    margin: 0px;
+    border: none;
+    
+    &:hover {
+        .card {
+            transition: height 2s;
+            &::after {
+                content: ' ';
+                position: absolute;
+                left: 0px;
+                height: 100%;
+                top: 0px;
+                border-left: 6px solid $gamerhunter;
+                transition: height 2s;
             }
         }
     }

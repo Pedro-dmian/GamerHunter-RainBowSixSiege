@@ -2,7 +2,7 @@
 import { Processors } from '../processors/Processors'
 
 // ? Session y constantes
-import { Session } from '../utils/Session'
+import { Storage } from '../utils/Storage'
 import { sessionStorage } from '../constants/consts'
 
 // ? Interfaces
@@ -25,17 +25,19 @@ export class UserService extends Processors {
     }
 
     private setUserProfile() {
-        let user : IUser = new Session().getItem(sessionStorage.user) || null
+        let user : IUser = new Storage().getItem(sessionStorage.user) || null
         
         const documents: any = {
             contentUser: $('.ContentComponentUserInformation') || null,
             user: $('.profile-username-content') || null,
             image: $('.profile-images-content') || null,
-            coint: $('.profile-coint-content') || null
+            coint: $('.profile-coint-content') || null,
+            profileMenu: $('#tab-setting') || null
         }
 
 
         if(user) {
+            $('#ContentComponentUserLogin').removeClass('d-none').addClass('d-block')
 
             if(documents.user) {
                 documents.user.html(user.username_gh || '')
@@ -52,12 +54,23 @@ export class UserService extends Processors {
             if(documents.contentUser) {
                 documents.contentUser.removeClass('d-none').addClass('d-flex')
             }
+
+            if(documents.profileMenu) {
+                documents.profileMenu.html(`<img src="${ 'https://psn-rsc.prod.dl.playstation.net/psn-rsc/avatar/UP2131/CUSA01736_00-AV00000000000337_C3CA66C1242B2FD87096_m.png' || '' }" alt="..." class="rounded-circle w-100">`)
+            }
+
         } else {
-            console.warn('No hay usuario disponible')
+            $('#ContentComponentUserLogin').removeClass('d-block').addClass('d-none')
 
             if(documents.contentUser) {
                 documents.contentUser.removeClass('d-flex').addClass('d-none')
             }
+
+            if(documents.profileMenu) {
+                documents.profileMenu.html(`<i class="flaticon2-user icon-md"><span class="d-none">&nbsp;</span></i>`)
+            }
+
+            console.warn('No hay usuario disponible')
         }
     }
 }

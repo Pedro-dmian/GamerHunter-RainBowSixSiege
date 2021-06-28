@@ -20,7 +20,7 @@ aside {
         .nav {
             .nav-item {
                 a.active {
-                    background-color: $gamerhunter;
+                    background-color: $black;// $gamerhunter;
                     i {
                         color: $white;
                     }
@@ -35,9 +35,14 @@ aside {
                     background-color: $gamerhunter-secundary;
                     max-height: 45px;
                     &:hover {
+                        background-color: $gamerhunter-secundary;
                         i {
                             color: $gamerhunter;
                         }
+                    }
+
+                    img {
+                        width: 60%;
                     }
                 }
             }

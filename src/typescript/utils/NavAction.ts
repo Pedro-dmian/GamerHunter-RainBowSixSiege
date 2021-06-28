@@ -1,5 +1,11 @@
 // ? Interfaces
 import { IMenu } from '../interfaces/IMenu.interface'
+
+// ? Session user y contants
+import { Storage } from '../utils/Storage'
+import { sessionStorage } from '../constants/consts'
+import { Utils } from '../utils/Utils'
+
 export class NavAction {
     private TapAction = ''
 
@@ -11,7 +17,16 @@ export class NavAction {
                 return;
             }
 
+            let userSession = new Storage().getItem(sessionStorage.token) || null
             let Tag = this.getTabMenu(currentTarget)
+
+            if(Tag.sessionRequired) {
+                if(typeof userSession === 'undefined' || userSession === null) {
+                    Tag = this.getTabMenu('tab-setting')
+
+                    new Utils().toastr({ type: 'warning', message: 'Requieres de una sesión activa', iconClass: 'flaticon2-warning' })
+                }
+            }
 
             this.menuTabActive(Tag)
             this.TabActive(Tag)
@@ -40,7 +55,8 @@ export class NavAction {
                 window: 'desktop',
                 index: 1,
                 active: true,
-                link: 'desktop.html'
+                link: 'desktop.html',
+                sessionRequired: false
             }
         }
 
@@ -52,7 +68,8 @@ export class NavAction {
                     window: 'desktop',
                     index: 1,
                     active: true,
-                    link: 'desktop.html'
+                    link: 'desktop.html',
+                    sessionRequired: false
                 }
                 break
             case 'tab-challenges': 
@@ -62,7 +79,8 @@ export class NavAction {
                     window: 'challenges',
                     index: 2,
                     active: true,
-                    link: 'challenges.html'
+                    link: 'challenges.html',
+                    sessionRequired: true
                 }
                 break
             case 'tab-setting':
@@ -72,7 +90,8 @@ export class NavAction {
                     window: 'setting',
                     index: 3,
                     active: true,
-                    link: 'setting.html'
+                    link: 'setting.html',
+                    sessionRequired: false
                 }
                 break
         }

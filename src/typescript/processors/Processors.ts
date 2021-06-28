@@ -5,7 +5,7 @@ import axios, { AxiosRequestConfig, Method, AxiosError, AxiosResponse } from 'ax
 import { webService } from '../constants/consts'
 import { Timings } from '../constants/timings'
 
-import { Session } from '../utils/Session'
+import { Storage } from '../utils/Storage'
 
 export class Processors {
 
@@ -18,7 +18,7 @@ export class Processors {
         let that = this
 
         return new Promise(async (resolve, reject) => {
-            const token = new Session().getItem('token') || null
+            const token = new Storage().getItem('token') || null
 
             const headers = {
                 Authorization: `Bearer ${token}`,

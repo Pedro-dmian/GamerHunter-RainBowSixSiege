@@ -1,123 +1,34 @@
-<div class="tab-content tab-challenges-content d-none mt-3 p-3" id="tab-challenges-content">
-    <div>
-        <h2 class="font-bold">
-            GameHunter
-        </h2>
+<div class="tab-content tab-challenges-content d-none mt-5 p-3 pt-5" id="tab-challenges-content">
+    <div id="ContentComponentGamerHunter" class="d-none">
+        <div>
+            <h2 class="font-bold">
+                GameHunter
+            </h2>
 
-        <div class="row">
-            <div class="col-md-12" id="">
-                <div class="widget-2">
-                    <ul class="widget-2-list">
-                        <li>
-                            <img src="https://s2.gaming-cdn.com/images/products/406/orig/tom-clancys-rainbow-six-siege-cover.jpg" alt="" class="w-100">
-                        </li>
-                        <li class="ml-2">
-                            <img src="https://static.wikia.nocookie.net/esgta/images/1/1b/Car%C3%A1tula_GTA_V.jpg/revision/latest?cb=20130402191528" alt="" class="w-100">
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div>
-        <h2 class="font-bold">
-            Challenges
-        </h2>
-
-        <div class="row">
-            <div class="col-6">
-                <div class="card card-custom bg-gamerhunter-secundary">
-                    <div class="card-body p-0">
-                        <div class="widget-1">
-                            <div class="widget-1-background" style="background-image: url('https://pbs.twimg.com/media/EpOGvRPWMAE8EFM.jpg')">
-                                <span class="widget-1-opacity"></span>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-4 position-relative">
-                                    <div class="widget-1-image">
-                                        <span class="widget-1-circle">
-                                            <img src="https://psn-rsc.prod.dl.playstation.net/psn-rsc/avatar/UP2131/CUSA01736_00-AV00000000000337_C3CA66C1242B2FD87096_m.png" alt="">
-                                        </span>
-                                        <span class="widget-1-circle-range"></span>
-                                    </div>
-                                </div>
-                                <div class="col-8 position-relative">
-                                    <div class="d-block mt-5">
-                                        <h6>Rainbow Six Siege</h6>
-                                        <p class="mt-2">
-                                            Play to Game with <span class="color-gamerhunter">Ramuss</span>
-                                        </p>
-                                    </div>
-
-                                    <div class="d-flex align-items-center w-100 flex-fill mt-lg-8 mt-8">
-                                        <div class="progress progress-xs mx-3 w-100">
-                                            <div class="progress-bar bg-gamerhunter" role="progressbar" style="width: 63%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-6 d-flex justify-content-start">
-                                            <span class="font-weight-bolder text-white ml-2">0</span>
-                                        </div>
-
-                                        <div class="col-6 d-flex justify-content-end">
-                                            <span class="font-weight-bolder text-white mr-2">2</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-6">
-                <div class="card card-custom bg-gamerhunter-secundary">
-                    <div class="card-body p-0">
-                        <div class="widget-1">
-                            <div class="widget-1-background" style="background-image: url('https://pbs.twimg.com/media/EpOGvRPWMAE8EFM.jpg')">
-                                <span class="widget-1-opacity"></span>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-4 position-relative">
-                                    <div class="widget-1-image">
-                                        <span class="widget-1-circle">
-                                            <img src="https://psn-rsc.prod.dl.playstation.net/psn-rsc/avatar/UP2131/CUSA01736_00-AV00000000000337_C3CA66C1242B2FD87096_m.png" alt="">
-                                        </span>
-                                        <span class="widget-1-circle-range"></span>
-                                    </div>
-                                </div>
-                                <div class="col-8 position-relative">
-                                    <div class="d-block mt-5">
-                                        <h6>Rainbow Six Siege</h6>
-                                        <p class="mt-2">
-                                            Play to Game with <span class="color-gamerhunter">Ramuss</span>
-                                        </p>
-                                    </div>
-
-                                    <div class="d-flex align-items-center w-100 flex-fill mt-lg-8 mt-8">
-                                        <div class="progress progress-xs mx-3 w-100">
-                                            <div class="progress-bar bg-gamerhunter" role="progressbar" style="width: 63%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-6 d-flex justify-content-start">
-                                            <span class="font-weight-bolder text-white ml-2">0</span>
-                                        </div>
-
-                                        <div class="col-6 d-flex justify-content-end">
-                                            <span class="font-weight-bolder text-white mr-2">2</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="widget-2 mt-5 mb-5 pb-5 pt-5">
+                        <ul class="widget-2-list" id="GamesList">
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
+
+        <div>
+            <h2 class="font-bold">
+                Challenges
+            </h2>
+
+
+            <div class="row">
+                <div class="col-md-12" id="tooglesBody"></div>
+            </div>
+
+            {{> ../link_account/link_account }}
+        </div>
+        
     </div>
+
+    
 </div>

@@ -1,40 +1,72 @@
-<div class="tab-content tab-desktop-content mt-3 p-3 d-block" id="tab-desktop-content">
-    <div class="row">
-        <div class="col-8 col-sm-8">
-            <div class="d-flex justify-content-center">
-                <div class="owl-carousel owl-theme owl-loaded owl-drag" id="SliderOWL">
+<div class="tab-content tab-desktop-content mt-5 p-3 pt-5 d-block" id="tab-desktop-content">
+    <div class="row d-flex justify-content-center">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-8" id="ContentComponentSliderImages">
+            <div class="card card-custom card-stretch gutter-b bg-gamerhunter-secundary">
+                <div class="card-body p-0">
+                    <div id="SliderOWL">
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-4 col-sm-4">
-            <div class="card card-custom bg-gamerhunter-secundary d-none ContentComponentUserInformation">
+        <div class="col-6 col-sm-6 col-md-6 col-lg-4 d-none" id="ContentComponentUserLogin">
+            <div class="card card-custom card-stretch gutter-b bg-gamerhunter-secundary d-none ContentComponentUserInformation">
                 <div class="card-body p-0">
-                    <div class="widget-1">
+                    <div class="widget-1 d-flex align-items-center">
                         <div class="widget-1-background" style="background-image: url('./assets/img/Challenges.jpg')">
                             <span class="widget-1-opacity"></span>
                         </div>
 
-                        <div class="widget-1-title pt-3 pb-3">
-                            <h5 class="text-center font-bold color-gamerhunter profile-username-content" id="profile-username-content"></h5>
-                        </div>
+                        <div class="widget-1-body">
+                            <div class="widget-1-title pt-3 pb-3">
+                                <h5 class="text-center font-bold color-gamerhunter profile-username-content" id="profile-username-content"></h5>
+                            </div>
 
-                        <div class="widget-1-image">
-                            <span class="widget-1-circle">
-                                <img src="./assets/img/default-user.png" class="profile-images-content" alt="" id="profile-images-content">
-                            </span>
-                            <span class="widget-1-circle-range"></span>
-                        </div>
+                            <div class="widget-1-image position-relative">
+                                <span class="widget-1-circle">
+                                    <img src="./assets/img/default-user.png" class="profile-images-content" alt="" id="profile-images-content">
+                                </span>
+                                <span class="widget-1-circle-range"></span>
+                            </div>
 
-                        <div class="widget-1-content pt-3">
-                            <p class="font-bold text-center  pb-3 m-0">
-                                <span class="color-gamerhunter profile-coint-content" id="profile-coint-content">+</span> HunterCoint
-                            </p>
+                            <div class="widget-1-content pt-3">
+                                <p class="font-bold text-center  pb-3 m-0">
+                                    <span class="color-gamerhunter profile-coint-content" id="profile-coint-content">+</span> HunterCoint
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div class="card card-custom bg-gamerhunter-secundary mt-3">
+        <div class="col-6 col-sm-6 col-md-6 col-lg-4 d-lg-none d-block">
+            <div class="card card-custom card-stretch gutter-b bg-transparent">
+                <div class="card-body p-0">
+                    <div class="widget-1">
+                        <div class="widget-1-background">
+                            <img src="https://crehana-blog.imgix.net/media/filer_public/90/83/9083027a-fc03-4e3f-8f55-636ffce6d36c/mcdonalds-happy-meal.jpg" alt="" class="w-100">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-8 col-xl-8 d-none" id="ContenteComponentCoupons">
+            <div class="card card-custom card-stretch gutter-b bg-transparent">
+                <div class="card-body p-0">
+                    <h2 class="font-bold pb-3">
+                        Descuentos destacados!
+                    </h2>
+
+                    <div class="row" id="Coupons"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 d-lg-block d-none">
+            <div class="card card-custom card-stretch gutter-b bg-transparent">
                 <div class="card-body p-0">
                     <div class="widget-1">
                         <div class="widget-1-background">

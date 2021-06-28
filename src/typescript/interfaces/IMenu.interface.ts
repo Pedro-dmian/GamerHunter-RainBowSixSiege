@@ -4,5 +4,6 @@ export interface IMenu {
     window: string
     index?: number
     active?: boolean
-    link: string
+    link: string,
+    sessionRequired: boolean
 }

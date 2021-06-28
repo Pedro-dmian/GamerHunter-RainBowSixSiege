@@ -1,5 +1,11 @@
 const GameClassId = 10826
 
+
+// ? Alias o name del juego [tomara del gameChallenges atributo name]
+const GameClassIdObject = {
+  'RainbowSix': 10826
+}
+
 const interestingFeatures = [
   'gep_internal',
   'game_info',
@@ -29,19 +35,33 @@ const webService = {
 
 const sessionStorage = {
   token: 'token',
-  user: 'user',
-  
+  user: 'user'
+}
+
+const localStorage = {
   images: 'Images',
   coupons: 'Coupons',
   games: 'Games',
   categoriesGame: 'CategoriesGame'
 }
 
+const indexDB = {
+  database: 'GameHunter'
+}
+
+const ChallengeGame = {
+  limit: 2
+}
+
 export {
   GameClassId,
+  GameClassIdObject,
   interestingFeatures,
   windowNames,
   hotkeys,
   webService,
-  sessionStorage
+  sessionStorage,
+  localStorage,
+  indexDB,
+  ChallengeGame
 }

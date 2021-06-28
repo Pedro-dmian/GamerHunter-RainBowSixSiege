@@ -14,7 +14,7 @@ let minify = {
     collapseWhitespace: true,
     caseSensitive: true,
     removeComments: true,
-    removeEmptyElements: true
+    removeEmptyElements: false
 }
 
 module.exports = env => ({
@@ -67,26 +67,28 @@ module.exports = env => ({
             title: 'background',
             template: './src/html/background.hbs',
             filename: path.resolve(__dirname, './dist/background.html'),
-            chunks: ['background']
-            // minify
+            chunks: ['background'],
+            minify
         }),
         new HtmlWebpackPlugin({
-            title: 'desktop',
+            title: 'Inicio',
             template: './src/html/desktop.hbs',
             filename: path.resolve(__dirname, './dist/desktop.html'),
-            chunks: ['desktop']
-            // minify
+            chunks: ['desktop'],
+            minify
         }),
         new HtmlWebpackPlugin({
+            title: 'En Juego',
             template: './src/html/in_game.hbs',
             filename: path.resolve(__dirname, './dist/in_game.html'),
-            chunks: ['in_game']
-            // minify
+            chunks: ['in_game'],
+            minify
         }),
         new webpack.ProvidePlugin({
             $: 'jquery',
             jQuery: 'jquery',
-            'window.jQuery': 'jquery'
+            'window.jQuery': 'jquery',
+            'moment': 'moment'
         }),
         new OverwolfPlugin(env)
     ]
