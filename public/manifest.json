@@ -49,12 +49,12 @@
         "transparent": true,
         "override_on_update": true,
         "size": {
-          "width": 300,
-          "height": 400
+          "width": 500,
+          "height": 600
         },
         "min_size": {
-          "width": 300,
-          "height": 400
+          "width": 500,
+          "height": 600
         }
       }
     },
