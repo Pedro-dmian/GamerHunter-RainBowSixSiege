@@ -74,7 +74,7 @@ export class ComponentsService extends Processors {
         </li>`
     }
 
-    public getChallengesGame(game: IGameChallenge, index: number) {
+    public getChallengesGame(game: IGameChallenge, index: number, inGame: boolean = false) {
         let challenges: IChallenge = game.challenges
         let HTMLChallenges: string = `<div class="row content-challenges ${ (index === 0) ? 'd-flex' : 'd-none' }" id="${ game.modal }">`
 
@@ -141,12 +141,19 @@ export class ComponentsService extends Processors {
                     <div class="col-8 col-sm-9 col-md-5">
                         <div class="alert alert-warning">
                             <p class="font-bold p-0 text-center d-block m-0">${ challenges.msg || 'Error al cargar datos del juego' }</p>
+                            <h6 class="font-bold text-dark p-0 text-center d-block m-0">${ 'Ingresa a ' + game.name + ' para vincular automáticamente' }</h6>
                         </div>
                     </div>
             `
         }
 
-        return HTMLChallenges + '</div>'
+        if(inGame) {
+            HTMLChallenges = ''
+        } else {
+            HTMLChallenges += '</div>'
+        }
+
+        return HTMLChallenges
     }
 
     private makeID(length: number = 10): string {
@@ -162,7 +169,11 @@ export class ComponentsService extends Processors {
     }
 
     public EnabledFormLinkAccount(game: IGameChallenge) {
-        let FormLinkAccout = document.getElementById('ContentComponentLinkAccount')
+        let FormLinkAccout = document.getElementById('ContentComponentLinkAccount') || null
+
+        if(!FormLinkAccout) {
+            return null
+        }
 
         if(!game.exist) {
             FormLinkAccout.classList.remove('d-none')

@@ -37,7 +37,8 @@ export class IndexDB {
         this.db.version(1).stores({
             games: 'id, Sync, overwolf_game_id',
             user: 'id, Sync',
-            challenges: '++id, category_id, cat_game_id'
+            challenges: '++id, category_id, cat_game_id',
+            games_categories: 'id, [id+categories.id]'
         })
     }
     

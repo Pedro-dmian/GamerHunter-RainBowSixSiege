@@ -99,6 +99,7 @@ export interface IDataChallenge {
 }
 
 export interface ILinkAccount {
-    username: string
+    username?: string
     game_id: number
+    account_id: string
 }

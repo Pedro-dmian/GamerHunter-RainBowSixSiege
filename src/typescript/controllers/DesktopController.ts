@@ -21,6 +21,7 @@ import { Storage } from '../utils/Storage'
 
 // ? IndexDB
 import { IndexDB } from '../processors/IndexDB'
+import { ICategorieGame } from '../interfaces/IGame'
 
 export class DesktopController {
     public FILE: string = 'tab-desktop'
@@ -68,7 +69,7 @@ export class DesktopController {
 
     private eventsDesktop() {
         this.formLogin()
-        this.formLinkAccount()
+        // this.formLinkAccount()
         this.signOff()
         this.openURL()
         this.TabActive()
@@ -301,6 +302,7 @@ export class DesktopController {
             let ChallengesElement: HTMLElement = document.getElementById('tooglesBody')
 
             try {
+                let getCategoriesGame: ICategorieGame[] = await CatalogsService.instance.getCategoriesGame()
                 let gamesChallenges: IGameChallenge[] = await ChallengesService.instance.getGamesChallenges()
                 
                 let HTMLGames : string = ''

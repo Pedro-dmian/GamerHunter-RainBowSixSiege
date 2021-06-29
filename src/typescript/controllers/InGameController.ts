@@ -71,7 +71,7 @@ class InGame extends AppWindow {
 			await ChallengesService.instance.getGamesChallenges()
 			let game: IGameChallenge = await ChallengesService.instance.getGameByOverwolfID(GameClassId).toPromise()
 			
-			let HTMLChallenges = ComponentsService.instance.getChallengesGame(game, 0)
+			let HTMLChallenges = ComponentsService.instance.getChallengesGame(game, 0, true)
 			let HTMLElement = document.getElementById('ChallengesBody')
 	
 			if(HTMLElement) {
@@ -132,10 +132,13 @@ class InGame extends AppWindow {
 
   	// ? Special events will be highlighted in the event log
 	private onNewEvents(e) {
+		
 		const shouldHighlight = e.events.some(event => {
 			switch (event.name) {
 				case 'gep_internal':
 				case 'game_info':
+					
+					break
 				case 'match':
 				case 'match_info':
 				case 'roster':

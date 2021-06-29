@@ -41,7 +41,7 @@ export interface ICategorieGameExtends {
         image_url: string
         name: string
         updated_at: Date
-    }
+    }[]
 }
 
 export interface ICategorieGame extends ICategorieGameExtends {

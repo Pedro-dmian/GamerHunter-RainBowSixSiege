@@ -8,6 +8,8 @@ import { IImage } from '../interfaces/IImage'
 import { ICoupon } from '../interfaces/ICoupon'
 import { IGame, ICategorieGame } from '../interfaces/IGame'
 
+import { IndexDB } from '../processors/IndexDB'
+
 export class CatalogsService extends Processors {
     private constructor() {
         super();
@@ -86,7 +88,7 @@ export class CatalogsService extends Processors {
             try {
                 let categoriesGame = await (await this.getAPI('categories_game', 'GET', null, 1)).data
 
-                new Storage().setItemLocalStorage(localStorage.categoriesGame, categoriesGame.data.games)
+                let games_categories = await IndexDB.instance.save('games_categories', categoriesGame.data.games)
 
                 resolve(categoriesGame.data.games)
             } catch(error) {
