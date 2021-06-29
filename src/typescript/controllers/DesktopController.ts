@@ -48,7 +48,7 @@ export class DesktopController {
     }
 
     private async startServices(): Promise<void> {
-        const token: string = new Storage().getItem('token')
+        const token: string = new Storage().getItemLocalStorage(sessionStorage.token)
         let isSession: boolean = (isEmpty(token)) ? false : true
 
         if(isSession) {
@@ -87,16 +87,21 @@ export class DesktopController {
             try {
                 let { data } = await LoginService.instance.login(this.UtilsClass.getFormData($('#formLogin')))
                 
-                new Storage().setItem(sessionStorage.token, data.access_token)
+                // new Storage().setItem(sessionStorage.token, data.access_token)
+                new Storage().setItemLocalStorage(sessionStorage.token, data.access_token)
 
                 let { data: user } = await LoginService.instance.user()
 
-                new Storage().setItem(sessionStorage.user, user)
+                new Storage().setItemLocalStorage(sessionStorage.user, user)
+                //new Storage().setItem(sessionStorage.user, user)
+                await UserService.instance.setUser(user)
                 
                 this.UtilsClass.disabledButtonAndLoader(event, false, null, 'Cargando datos del usuario.', false, 'success', 'success')
 
                 this.startServices()
             } catch(error) {
+                console.log('error >>', error)
+
                 let message: string = ''
 
                 if(error.response) {
@@ -113,6 +118,7 @@ export class DesktopController {
             this.UtilsClass.disabledButtonAndLoader(event, true, '', '', true)
 
             new Storage().clearAllItems()
+            new Storage().clearAllItemsLocalStorage()
 
             this.startServices()
 

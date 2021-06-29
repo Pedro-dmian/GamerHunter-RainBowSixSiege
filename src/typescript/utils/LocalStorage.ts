@@ -1,16 +1,14 @@
 export class LocalStorage {
 	constructor () { }
 
-    getItemLocalStorage<T> (itemName: string): Promise<T> {
-		return new Promise((resolve, reject) => {
-			const itemValue = localStorage.getItem(itemName)
+    getItemLocalStorage<T> (itemName: string): any {
+		const itemValue = localStorage.getItem(itemName)
       
-			if (itemName) {
-				return resolve(JSON.parse(itemValue))
-			} else {
-				return reject(reject)
-			}
-		})
+		if (itemName) {
+			return JSON.parse(itemValue)
+		} else {
+			return null
+		}
     }
   
     setItemLocalStorage<T> (itemName: string, itemValue: T): void {

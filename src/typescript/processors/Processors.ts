@@ -2,7 +2,7 @@
 import axios, { AxiosRequestConfig, Method, AxiosError, AxiosResponse } from 'axios'
 
 // ? Constant
-import { webService } from '../constants/consts'
+import { webService, sessionStorage } from '../constants/consts'
 import { Timings } from '../constants/timings'
 
 import { Storage } from '../utils/Storage'
@@ -18,7 +18,7 @@ export class Processors {
         let that = this
 
         return new Promise(async (resolve, reject) => {
-            const token = new Storage().getItem('token') || null
+            const token = new Storage().getItemLocalStorage(sessionStorage.token) || null
 
             const headers = {
                 Authorization: `Bearer ${token}`,

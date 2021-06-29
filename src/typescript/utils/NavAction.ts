@@ -17,7 +17,7 @@ export class NavAction {
                 return;
             }
 
-            let userSession = new Storage().getItem(sessionStorage.token) || null
+            let userSession = new Storage().getItemLocalStorage(sessionStorage.token) || null
             let Tag = this.getTabMenu(currentTarget)
 
             if(Tag.sessionRequired) {

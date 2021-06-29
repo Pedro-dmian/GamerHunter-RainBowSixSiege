@@ -6,7 +6,7 @@
     "author": "Overwolf",
     "version": "3.0.1",
     "minimum-overwolf-version": "0.160.0",
-    "description": "An example app for developers new to Overwolf",
+    "description": "Gamer hunter",
     "dock_button_title": "Sample - TS",
     "icon": "assets/icons/IconMouseOver.png",
     "icon_gray": "assets/icons/IconMouseNormal.png",

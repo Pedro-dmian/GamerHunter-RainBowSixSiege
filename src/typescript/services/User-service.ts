@@ -5,10 +5,14 @@ import { Processors } from '../processors/Processors'
 import { Storage } from '../utils/Storage'
 import { sessionStorage, webService } from '../constants/consts'
 
+import { IndexDB } from '../processors/IndexDB'
+
 // ? Interfaces
 import { IUser } from '../interfaces/IUser.interface'
 
 export class UserService extends Processors {
+    public objectStore: string = 'user'
+
     private constructor() {
         super()
     }
@@ -24,8 +28,20 @@ export class UserService extends Processors {
         this.setUserProfile()
     }
 
+    public setUser(user: IUser): Promise<IUser> {
+        return new Promise<IUser>(async (resolve, reject) => {
+            try {
+                let userSave = await new IndexDB().save(this.objectStore, user)
+
+                resolve(userSave)
+            } catch(error) {
+                reject(error)
+            }
+        })
+    }
+
     private setUserProfile() {
-        let user : IUser = new Storage().getItem(sessionStorage.user) || null
+        let user : IUser = new Storage().getItemLocalStorage(sessionStorage.user) || null
         const pathImage : string = `${ webService.api }/storage/_avatars_/`
         
         const documents: any = {

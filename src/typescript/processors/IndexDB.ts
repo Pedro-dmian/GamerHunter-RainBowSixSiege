@@ -36,6 +36,7 @@ export class IndexDB {
         
         this.db.version(1).stores({
             games: 'id, Sync, overwolf_game_id',
+            user: 'id, Sync'
         })
     }
     
