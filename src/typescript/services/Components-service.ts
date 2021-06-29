@@ -166,7 +166,7 @@ export class ComponentsService extends Processors {
 
         if(!game.exist) {
             FormLinkAccout.classList.remove('d-none')
-            FormLinkAccout.classList.add('d-block')
+            FormLinkAccout.classList.add('d-flex')
 
             let svgIcon = document.getElementById('iconSVGFormLinlAccount') || null
             let inputGameID: any = document.getElementById('game_id') || null
@@ -175,13 +175,13 @@ export class ComponentsService extends Processors {
             if(!isEmpty(game.api_icon)) {
                 if(svgIcon) {
                     svgIcon.classList.remove('d-none')
-                    svgIcon.classList.add('d-block')
+                    svgIcon.classList.add('d-flex')
                 }
 
                 document.getElementById('imageFormGameRelationship').setAttribute('src', game.api_icon)
             } else {
                 if(svgIcon) {
-                    svgIcon.classList.remove('d-block')
+                    svgIcon.classList.remove('d-flex')
                     svgIcon.classList.add('d-none')
                 }
             }
@@ -194,7 +194,7 @@ export class ComponentsService extends Processors {
                 inputUsername.setAttribute('placeholder', `Username ${ game.name }`)
             }
         } else {
-            FormLinkAccout.classList.remove('d-block')
+            FormLinkAccout.classList.remove('d-flex')
             FormLinkAccout.classList.add('d-none')
         }
     }

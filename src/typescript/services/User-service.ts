@@ -3,7 +3,7 @@ import { Processors } from '../processors/Processors'
 
 // ? Session y constantes
 import { Storage } from '../utils/Storage'
-import { sessionStorage } from '../constants/consts'
+import { sessionStorage, webService } from '../constants/consts'
 
 // ? Interfaces
 import { IUser } from '../interfaces/IUser.interface'
@@ -26,6 +26,7 @@ export class UserService extends Processors {
 
     private setUserProfile() {
         let user : IUser = new Storage().getItem(sessionStorage.user) || null
+        const pathImage : string = `${ webService.api }/storage/_avatars_/`
         
         const documents: any = {
             contentUser: $('.ContentComponentUserInformation') || null,
@@ -44,7 +45,7 @@ export class UserService extends Processors {
             }
     
             if(documents.image) {
-                documents.image.attr('src', 'https://psn-rsc.prod.dl.playstation.net/psn-rsc/avatar/UP2131/CUSA01736_00-AV00000000000337_C3CA66C1242B2FD87096_m.png' || '')
+                documents.image.attr('src', `${pathImage + user.avatar}` || './assets/img/default-user.png')
             }
     
             if(documents.coint) {
@@ -56,7 +57,7 @@ export class UserService extends Processors {
             }
 
             if(documents.profileMenu) {
-                documents.profileMenu.html(`<img src="${ 'https://psn-rsc.prod.dl.playstation.net/psn-rsc/avatar/UP2131/CUSA01736_00-AV00000000000337_C3CA66C1242B2FD87096_m.png' || '' }" alt="..." class="rounded-circle w-100">`)
+                documents.profileMenu.html(`<img src="${pathImage + user.avatar || './assets/img/default-user.png'} " alt="..." class="rounded-circle w-100">`)
             }
 
         } else {

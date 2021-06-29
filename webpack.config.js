@@ -6,8 +6,6 @@ const
     OverwolfPlugin = require('./overwolf.webpack'),
     HtmlWebPackPartialsPlugin = require('html-webpack-partials-plugin'),
     webpack = require('webpack');
-    // NodePolyfillPlugin = require("node-polyfill-webpack-plugin"),
-    // nodeExternals = require('webpack-node-externals');
 
 let minify = {
     html5: true,
@@ -37,7 +35,15 @@ module.exports = env => ({
             },
             {
                 test: /\.s[ac]ss$/i,
-                use: [ 'style-loader', 'css-loader', 'sass-loader' ]
+                use:  [{
+                    loader: 'style-loader', // inject CSS to page
+                  }, {
+                    loader: 'css-loader', // translates CSS into CommonJS modules
+                  }, {
+                    loader: 'postcss-loader', // Run postcss actions
+                  }, {
+                    loader: 'sass-loader' // compiles Sass to CSS
+                  }]
             },
             {
                 test: /\.(png|jpg|jpeg|gif)$/i,

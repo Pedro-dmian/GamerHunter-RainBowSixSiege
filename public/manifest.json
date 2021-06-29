@@ -22,7 +22,7 @@
     "windows": {
       "background": {
         "file": "background.html",
-        "is_background_page": true,
+        "is_background_page": true
       },
       "desktop": {
         "file": "desktop.html",

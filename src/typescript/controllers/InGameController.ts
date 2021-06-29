@@ -67,29 +67,35 @@ class InGame extends AppWindow {
 	}
 
 	public async getChallenges() {
-		await ChallengesService.instance.getGamesChallenges()
-		let game: IGameChallenge = await ChallengesService.instance.getGameByOverwolfID(GameClassId).toPromise()
-		
-		let HTMLChallenges = ComponentsService.instance.getChallengesGame(game, 0)
-		let HTMLElement = document.getElementById('ChallengesBody')
-
-		if(HTMLElement) {
-			HTMLElement.innerHTML = HTMLChallenges
-		}
-
-		let ElementAlert = document.getElementById(game.modal)
-
-		if(ElementAlert) {
-			if(!game.exist) {
-				ElementAlert.classList.add('mt-5')
-				ElementAlert.classList.add('mb-0')
-			} else {
-				ElementAlert.classList.remove('mt-5')
-				ElementAlert.classList.remove('mb-0')
+		try {
+			await ChallengesService.instance.getGamesChallenges()
+			let game: IGameChallenge = await ChallengesService.instance.getGameByOverwolfID(GameClassId).toPromise()
+			
+			let HTMLChallenges = ComponentsService.instance.getChallengesGame(game, 0)
+			let HTMLElement = document.getElementById('ChallengesBody')
+	
+			if(HTMLElement) {
+				HTMLElement.innerHTML = HTMLChallenges
 			}
+	
+			let ElementAlert = document.getElementById(game.modal)
+	
+			if(ElementAlert) {
+				if(!game.exist) {
+					ElementAlert.classList.add('mt-5')
+					ElementAlert.classList.add('mb-0')
+				} else {
+					ElementAlert.classList.remove('mt-5')
+					ElementAlert.classList.remove('mb-0')
+				}
+			}
+	
+			ComponentsService.instance.EnabledFormLinkAccount(game)
+		} catch(error) {
+			console.log('error >>', error)
+			console.log('error >>', error.message)
 		}
-
-		ComponentsService.instance.EnabledFormLinkAccount(game)
+		
 	}
 
 	private formLinkAccount() {
@@ -149,8 +155,10 @@ class InGame extends AppWindow {
   	// ? Displays the toggle minimize/restore hotkey in the window header
 	private async setToggleHotkeyText() {
 		const hotkeyText = await OWHotkeys.getHotkeyText(hotkeys.toggle, GameClassId)
-		const hotkeyElem = document.getElementById('hotkey')
-		hotkeyElem.textContent = hotkeyText
+
+		console.log(hotkeyText)
+		//const hotkeyElem = document.getElementById('hotkey')
+		//hotkeyElem.textContent = hotkeyText
 	}
 
 	// ? Sets toggleInGameWindow as the behavior for the Ctrl+F hotkey
@@ -172,9 +180,9 @@ class InGame extends AppWindow {
 
 	// ? Appends a new line to the specified log
 	private logLine(log: HTMLElement, data, highlight) {
-		console.log(`${log.id}:`)
+		console.log(log)
 		console.log(data)
-		
+		/*
 		const line = document.createElement('pre')
 		
 		line.textContent = JSON.stringify(data)
@@ -190,6 +198,7 @@ class InGame extends AppWindow {
 		if (shouldAutoScroll) {
 			log.scrollTop = log.scrollHeight
 		}
+		*/
 	}
 }
 

@@ -1,14 +1,11 @@
-import '../app';
-import { windowNames, GameClassId } from "../constants/consts";
+import '../app'
+import { windowNames, GameClassId } from "../constants/consts"
 import {
   OWGames,
   OWGameListener,
   OWWindow
-} from '@overwolf/overwolf-api-ts';
-import RunningGameInfo = overwolf.games.RunningGameInfo;
-
-import { NavAction } from "../utils/NavAction";
-
+} from '@overwolf/overwolf-api-ts'
+import RunningGameInfo = overwolf.games.RunningGameInfo
 
 // The background controller holds all of the app's background logic - hence its name. it has
 // many possible use cases, for example sharing data between windows, or, in our case,
@@ -17,9 +14,10 @@ import { NavAction } from "../utils/NavAction";
 // Our background controller implements the Singleton design pattern, since only one
 // instance of it should exist.
 
-export class BackgroundController {
-  public FILE: string = "tab-challenges";
+import { Storage } from '../utils/Storage'
+import { sessionStorage } from '../constants/consts'
 
+export class BackgroundController {
   private static _instance: BackgroundController;
   private _windows = {};
   private GameListener: OWGameListener;
@@ -29,11 +27,13 @@ export class BackgroundController {
     this._windows[windowNames.desktop] = new OWWindow(windowNames.desktop);
     this._windows[windowNames.inGame] = new OWWindow(windowNames.inGame);
 
-    // When a Fortnite game is started or is ended, toggle the app's windows
+    // When a [Games] game is started or is ended, toggle the app's windows
     this.GameListener = new OWGameListener({
       onGameStarted: this.toggleWindows.bind(this),
       onGameEnded: this.toggleWindows.bind(this)
     });
+
+    console.log(new Storage().getItem(sessionStorage.token))
   };
 
   // Implementing the Singleton design pattern
@@ -46,10 +46,10 @@ export class BackgroundController {
   }
 
   // When running the app, start listening to games' status and decide which window should
-  // be launched first, based on whether Fortnite is currently running
+  // be launched first, based on whether [Game] is currently running
   public async run() {
     this.GameListener.start();
-    const currWindow = await this.isFortniteRunning() ? windowNames.inGame : windowNames.desktop;
+    const currWindow = await this.isGameRunning() ? windowNames.inGame : windowNames.desktop;
     this._windows[currWindow].restore();
   }
 
@@ -67,13 +67,13 @@ export class BackgroundController {
     }
   }
 
-  private async isFortniteRunning(): Promise<boolean> {
+  private async isGameRunning(): Promise<boolean> {
     const info = await OWGames.getRunningGameInfo();
 
     return info && info.isRunning && this.isGame(info);
   }
 
-  // Identify whether the RunningGameInfo object we have references Fortnite
+  // Identify whether the RunningGameInfo object we have references RainboxSix
   private isGame(info: RunningGameInfo) {
     return info.classId === GameClassId;
   }

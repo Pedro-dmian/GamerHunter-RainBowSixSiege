@@ -45,6 +45,8 @@ module.exports = class OverwolfPlugin {
       manifestPath = path.resolve(__dirname, './public/manifest.json'),
       dist = path.join(__dirname, 'dist/');
 
+    console.log(manifestPath)
+
     const [
       pkg,
       manifest
