@@ -100,6 +100,8 @@ class InGame extends AppWindow {
 	}
 	
 	private async onInfoUpdates(info) {
+		console.log('info >>', JSON.stringify(info))
+
 		let eventsWithValues = GameEventsService.instance.rainbowSixSiegeGameEvents(info, false, this.GameInformation.id)
 
 		await this.logLine(eventsWithValues, false)
@@ -107,6 +109,8 @@ class InGame extends AppWindow {
 
   	// ? Special events will be highlighted in the event log
 	private async onNewEvents(e) {
+		console.log('event >>', JSON.stringify(e))
+
 		let shouldHighlightEvent = GameEventsService.instance.shouldHighlightEvent(e, this.GameInformation)
 
 		await this.logLine(shouldHighlightEvent.eventShort)
