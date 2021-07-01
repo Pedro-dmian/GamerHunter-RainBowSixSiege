@@ -9,7 +9,15 @@ import { Utils } from '../utils/Utils'
 import { isEmpty } from 'lodash'
 
 // ? Services
-import { LoginService, UserService, CatalogsService, ComponentsService, ChallengesService } from '../services'
+import {
+    LoginService,
+    UserService,
+    CatalogsService,
+    ComponentsService,
+    ChallengesService,
+    CategoryGameService,
+    AdsService
+} from '../services'
 
 // ? Interfaces
 import { IImage } from '../interfaces/IImage'
@@ -31,20 +39,19 @@ export class DesktopController {
     constructor() {
         new NavAction()
 
-        // The desktop window is the window displayed while GamePlay is not running.
-        // In our case, our desktop window has no logic - it only displays static data.x
-        // Therefore, only the generic AppWindow class is called.
         new AppWindow(windowNames.desktop)
         new IndexDB().main()
+        new AdsService().runAds(document.getElementById("ad-div"))
+        new AdsService().runAds(document.getElementById('ad-div-responsive'))
         this.main()
     }
 
     private async main() {
         this.UtilsClass = new Utils()
 
-        this.startServices()
+        await this.startServices()
 
-        // ! Cargar Events NOTA::::LOS EVENTOS SE TIENEN QUE CARGAR UNA SOLA VEZ 😎
+        // ! Cargar Events NOTA::::LOS EVENTOS SE TIENEN QUE CARGAR UNA SOLA VEZ
         this.eventsDesktop()
     }
 
@@ -159,6 +166,8 @@ export class DesktopController {
         let buttons = document.querySelectorAll('.widget-3-coupon')
 
         const URLEventOPEN = (event) => {
+            this.UtilsClass.toastr({ type: 'success', message: 'Se abrira en un momento en tu navegador', iconClass: 'flaticon2-warning' })
+
             let URL: string = event.currentTarget?.getAttribute('data-url') || ''
 
             if(!isEmpty(URL)) {
@@ -302,7 +311,7 @@ export class DesktopController {
             let ChallengesElement: HTMLElement = document.getElementById('tooglesBody')
 
             try {
-                let getCategoriesGame: ICategorieGame[] = await CatalogsService.instance.getCategoriesGame()
+                let getCategoriesGame: ICategorieGame[] = await CategoryGameService.instance.getCategoriesGame()
                 let gamesChallenges: IGameChallenge[] = await ChallengesService.instance.getGamesChallenges()
                 
                 let HTMLGames : string = ''

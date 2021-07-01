@@ -5,6 +5,8 @@
     {{> ./components/styles }}
 
     <title>In Game</title>
+
+    <script src="https://content.overwolf.com/libs/ads/latest/owads.min.js"></script>
 </head>
 <body>
     <div class="w-100">
@@ -13,6 +15,29 @@
 
     <main id="main-content">
         <div id="body">
+            <div class="wrapper" id="ContentCongratulations">
+                <div class="modal">
+                    <span class="emoji round">🏆</span>
+                    <h1>Felicidades Completaste un Challenger</h1>
+                </div>
+                
+                <div class="firework-1"></div>
+                <div class="firework-2"></div>
+                <div class="firework-3"></div>
+                <div class="firework-4"></div>
+                <div class="firework-5"></div>
+                <div class="firework-6"></div>
+                <div class="firework-7"></div>
+                <div class="firework-8"></div>
+                <div class="firework-9"></div>
+                <div class="firework-10"></div>
+                <div class="firework-11"></div>
+                <div class="firework-12"></div>
+                <div class="firework-13"></div>
+                <div class="firework-14"></div>
+                <div class="firework-15"></div>
+            </div>
+
             <div class="d-block" id="ChallengesBody">
                 {{!-- <div class="col-12">
                     <div class="card card-custom bg-gamerhunter-secundary">
@@ -108,11 +133,13 @@
                 </div> --}}
             </div>
 
+            <div class="d-none" id="alertPageInGame"></div>
+
             {{> ./components/link_account/link_account }}
 
             <div class="row">
                 <div class="col-12">
-                    <img src="https://i.pinimg.com/originals/f1/9c/bb/f19cbbe31e94f3c9ac430a4b49277c76.jpg" alt="" class="w-100">
+                    <div class="widget-1" id="ad-div"></div>
                 </div>
             </div>
         </div>

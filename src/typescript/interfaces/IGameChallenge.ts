@@ -93,6 +93,7 @@ export interface IDataChallenge {
                 api_image_url: string
             }
         }
+        amountIHave: number
     },
     error: boolean
     msg: string

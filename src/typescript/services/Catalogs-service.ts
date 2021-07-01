@@ -6,9 +6,7 @@ import { localStorage } from '../constants/consts'
 
 import { IImage } from '../interfaces/IImage'
 import { ICoupon } from '../interfaces/ICoupon'
-import { IGame, ICategorieGame } from '../interfaces/IGame'
-
-import { IndexDB } from '../processors/IndexDB'
+import { IGame } from '../interfaces/IGame'
 
 export class CatalogsService extends Processors {
     private constructor() {
@@ -22,16 +20,15 @@ export class CatalogsService extends Processors {
         return (<any>window).catalogs_api;
     }
 
-    public listen(): Promise<{ images: IImage, coupons: ICoupon[], games: IGame[], categoriesGame: ICategorieGame[] }> {
+    public listen(): Promise<{ images: IImage, coupons: ICoupon[], games: IGame[] }> {
         return new Promise(async (resolve, reject) => {
             try {
                 let images = await this.getImages()
                 let coupons = await this.getCoupons()
                 let games = await this.getGames()
-                let categoriesGame = await this.getCategoriesGame()
 
                 resolve({
-                    images, coupons, games, categoriesGame
+                    images, coupons, games
                 })
             } catch(error)  {
                 reject(error)
@@ -77,20 +74,6 @@ export class CatalogsService extends Processors {
                 new Storage().setItemLocalStorage(localStorage.games, games.data.games)
 
                 resolve(games.data.games)
-            } catch(error) {
-                reject(error)
-            }
-        })
-    }
-
-    public async getCategoriesGame(): Promise<ICategorieGame[]> {
-        return new Promise<ICategorieGame[]>(async (resolve, reject) => {
-            try {
-                let categoriesGame = await (await this.getAPI('categories_game', 'GET', null, 1)).data
-
-                let games_categories = await IndexDB.instance.save('games_categories', categoriesGame.data.games)
-
-                resolve(categoriesGame.data.games)
             } catch(error) {
                 reject(error)
             }

@@ -90,4 +90,31 @@ export class UserService extends Processors {
             console.warn('No hay usuario disponible')
         }
     }
+
+    public isLoggedIn(element: HTMLElement, hiddenElement: HTMLElement, classAdd: string = 'd-block', classRemove: string = 'd-block'): string {
+		let token = new Storage().getItemLocalStorage(sessionStorage.token) || null
+		
+		if(element) {
+            if(!token) {
+                element.classList.remove('d-none')
+                element.classList.add(classAdd)
+                element.innerHTML = `<div class="alert alert-warning mt-5 pb-5 text-center">El usuario no contiene una sesión activa iniciar sesión y volver a intentar</div>`
+            } else {
+                element.classList.remove(classAdd)
+                element.classList.add('d-none')
+            }
+		}
+
+        if(hiddenElement) {
+            if(!token) {
+                hiddenElement.classList.remove(classRemove)
+                hiddenElement.classList.add('d-none')
+            } else {
+                hiddenElement.classList.remove('d-none')
+                hiddenElement.classList.add(classRemove)
+            }
+        }
+
+        return token
+	}
 }

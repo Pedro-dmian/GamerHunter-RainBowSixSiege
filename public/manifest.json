@@ -6,8 +6,8 @@
     "author": "Overwolf",
     "version": "3.0.1",
     "minimum-overwolf-version": "0.160.0",
-    "description": "Gamer hunter",
-    "dock_button_title": "Sample - TS",
+    "description": "Gamer hunter Demo",
+    "dock_button_title": "Gamer Hunter - Demo",
     "icon": "assets/icons/IconMouseOver.png",
     "icon_gray": "assets/icons/IconMouseNormal.png",
     "launcher_icon": "assets/icons/DesktopIcon.ico",
@@ -15,7 +15,10 @@
   },
   "permissions": [
     "Hotkeys",
-    "GameInfo"
+    "GameInfo",
+    "Extensions",
+    "Streaming",
+    "Profile"
   ],
   "data": {
     "start_window": "background",

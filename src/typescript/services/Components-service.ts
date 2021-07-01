@@ -85,6 +85,8 @@ export class ComponentsService extends Processors {
                 const ChallengeData: IDataChallenge = challenges['data_challenge_' + key]
                 
                 if(typeof ChallengeData !== 'undefined') {
+                    let percentageCalculate = (ChallengeData.info_challenge.amountIHave || 0) / (ChallengeData.info_challenge.goal || 0) * 100
+
                     HTMLChallenges += `
                         <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                             <div class="card card-custom bg-gamerhunter-secundary">
@@ -113,13 +115,13 @@ export class ComponentsService extends Processors {
                             
                                                 <div class="d-flex align-items-center w-100 flex-fill mt-lg-8 mt-8">
                                                     <div class="progress progress-xs mx-3 w-100">
-                                                        <div class="progress-bar bg-gamerhunter" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                                        <div class="progress-bar bg-gamerhunter" role="progressbar" style="width: ${ percentageCalculate }%;" aria-valuenow="${ percentageCalculate }" aria-valuemin="0" aria-valuemax="100"></div>
                                                     </div>
                                                 </div>
                             
                                                 <div class="row">
                                                     <div class="col-6 d-flex justify-content-start">
-                                                        <span class="font-weight-bolder text-white ml-2">${ '0' }</span>
+                                                        <span class="font-weight-bolder text-white ml-2">${ ChallengeData.info_challenge.amountIHave || 0 }</span>
                                                     </div>
                             
                                                     <div class="col-6 d-flex justify-content-end">
@@ -136,24 +138,22 @@ export class ComponentsService extends Processors {
                 }
             }
         } else {
+            const alertMessageDesktop = (!inGame) ? `
+                <p class="font-bold p-0 text-center d-block m-0">${ challenges.msg || 'Error al cargar datos del juego' }</p>
+                <h6 class="font-bold text-dark p-0 text-center d-block m-0">${ 'Ingresa a ' + game.name + ' para vincular automáticamente' }</h6>` :
+                `<p class="font-bold p-0 text-center d-block m-0">Intentando vincular tu cuenta</p>`
+
             HTMLChallenges = `
                 <div class="row content-challenges justify-content-center ${ (index === 0) ? 'd-flex' : 'd-none' }" id="${ game.modal }">
                     <div class="col-8 col-sm-9 col-md-5">
                         <div class="alert alert-warning">
-                            <p class="font-bold p-0 text-center d-block m-0">${ challenges.msg || 'Error al cargar datos del juego' }</p>
-                            <h6 class="font-bold text-dark p-0 text-center d-block m-0">${ 'Ingresa a ' + game.name + ' para vincular automáticamente' }</h6>
+                            ${ alertMessageDesktop }
                         </div>
                     </div>
             `
         }
 
-        if(inGame) {
-            HTMLChallenges = ''
-        } else {
-            HTMLChallenges += '</div>'
-        }
-
-        return HTMLChallenges
+        return HTMLChallenges += '</div>'
     }
 
     private makeID(length: number = 10): string {

@@ -1,8 +1,9 @@
 {
-  "name": "example-ts",
-  "version": "3.0.0",
-  "description": "",
+  "name": "gamer-hunter",
+  "version": "0.0.1",
+  "description": "GameHunter Demo",
   "main": "index.js",
+  "author": "Damian Palomo",
   "scripts": {
     "build": "webpack --mode=development --env makeOpk",
     "dev": "webpack --watch --mode=development",

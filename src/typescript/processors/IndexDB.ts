@@ -37,7 +37,7 @@ export class IndexDB {
         this.db.version(1).stores({
             games: 'id, Sync, overwolf_game_id',
             user: 'id, Sync',
-            challenges: '++id, category_id, cat_game_id',
+            challenges: '++id, cat_type_category_challenge, cat_game_id, overwolf_game_id, Sync',
             games_categories: 'id, [id+categories.id]'
         })
     }
@@ -61,7 +61,7 @@ export class IndexDB {
             try {
                 const store = this.db[objectStore]
                 const returnDexie = await this.db.transaction('rw', store, () => elements.forEach(item => {
-                    item.Sync = 1
+                    item.Sync = (typeof item.Sync === 'undefined') ? 1 : ((item.Sync) ? item.Sync : 0) 
                     
                     store.put(item)
                 }))
@@ -125,17 +125,11 @@ export class IndexDB {
             const store: any = this.db[objectStore]
     
             this.db.transaction('r', store, async () => {
-                try {
-                    let values = await store.where(key || 'id').equals(value).toArray()
-    
-                    observer.next(values)
-                    observer.complete()
-                } catch (e) {
-                    debugger
-    
-                    observer.error(e)
-                }
-            })
+                return await store.where(key || 'id').equals(value).toArray()
+            }).then(values => {
+                observer.next(values)
+                observer.complete()
+            }).catch(e => observer.error(e))
         })
     }
     
@@ -148,15 +142,13 @@ export class IndexDB {
             const store: any = this.db[objectStore]
     
             this.db.transaction('r', store, async () => {
-                try {
-                    const values = await store.get(key)
+                const values = await store.get(key)
     
-                    observer.next(values)
-                    observer.complete()
-                } catch (e) {
-                    observer.error(e)
-                }
-            })
+                return values
+            }).then(values => {
+                observer.next(values)
+                observer.complete()
+            }).catch(e => observer.error(e))
         })
     }
     
@@ -169,14 +161,14 @@ export class IndexDB {
             const store: any = this.db[objectStore]
     
             this.db.transaction('r', store, async () => {
-                try {
-                    const values = await store.where(key || 'id').equals(value).first()
-    
-                    observer.next(values)
-                    observer.complete()
-                } catch (e) {
-                    observer.error(e)
-                }
+                const values = await store.where(key || 'id').equals(value).first()
+                
+                return values
+            }).then((values) => {
+                observer.next(values)
+                observer.complete()
+            }).catch(e => {
+                observer.error(e)
             })
         })
     }
@@ -240,19 +232,17 @@ export class IndexDB {
             const store: any = this.db[objectStore]
     
             this.db.transaction('r', store, async () => {
-                try {
-                    var items = await store
+                var items = await store
     
-                    if (whereCondition.where && whereCondition.value != null) {
-                        observer.next(items.where(whereCondition.where).equals(whereCondition.value).count())
-                    }
-    
-                    observer.next(items.count())
-                    observer.complete()
-                } catch (e) {
-                    observer.error(e)
+                if (whereCondition.where && whereCondition.value != null) {
+                    observer.next(items.where(whereCondition.where).equals(whereCondition.value).count())
                 }
-            })
+
+                return items.count()
+            }).then(count => {
+                observer.next(count)
+                observer.complete()
+            }).catch(e => observer.error(e))
         })
     }
     
@@ -260,14 +250,14 @@ export class IndexDB {
         return this.countStore(objectStore, { where: 'Sync', value })
     }
     
-    public calculateSlopes(objectStore, key = 'Sync', value = 0) {
+    public async calculateSlopes(objectStore, key = 'Sync', value = 0) {
         if (!objectStore || isEmpty(objectStore)) {
             throw new Error('La tabla no fue seleccionada')
         }
 
         const store: any = this.db[objectStore]
 
-        return this.db.transaction('r', store, async () => {
+        return await this.db.transaction('r', store, async () => {
             return store.where(key || '_id').equals(value).count()
         })
     }
@@ -281,15 +271,11 @@ export class IndexDB {
             const store: any = this.db[objectStore]
     
             this.db.transaction('r', store, async () => {
-                try {
-                    const values = await store.where(key || '_id').equals(value).delete()
-    
-                    observer.next(values)
-                    observer.complete()
-                } catch (e) {
-                    observer.error(e)
-                }
-            })
+                return await store.where(key || '_id').equals(value).delete()
+            }).then(values => {
+                observer.next(values)
+                observer.complete()
+            }).catch(e => observer.error(e))
         })
     }
     
