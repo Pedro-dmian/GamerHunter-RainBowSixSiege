@@ -219,6 +219,8 @@ export class GameEventsService extends Processors {
             data: null
         }
 
+        debugger
+
         switch(SomeData.feature) {
             case 'gep_internal':
                 eventSelectedInfo = {
@@ -244,14 +246,14 @@ export class GameEventsService extends Processors {
                     SomeData.info[SomeData.feature].pseudo_match_id || 
                     SomeData.info[SomeData.feature].match_id || 
                     SomeData.info[SomeData.feature].map_id || 
-                    SomeData.info[SomeData.feature].round_outcome_type || 1
+                    SomeData.info[SomeData.feature].round_outcome_type || 0
                 }
                 break
             case 'round':
                 eventSelectedInfo = {
                     name: SomeData.feature,
                     key: 'number',
-                    data: SomeData.info['round'].round || 1
+                    data: SomeData.info['round'].round || 0
                 }
                 break
             case 'match':
@@ -260,15 +262,28 @@ export class GameEventsService extends Processors {
                     key: 'score',
                     data: SomeData.info[SomeData.feature].score
                 }
+
+                if(eventSelectedInfo) {
+                    eventSelectedInfo.data = (typeof eventSelectedInfo.data === 'string') ? parseFloat(eventSelectedInfo.data) : 0
+                }
                 break
-            case 'roster' || 'players':
+            case 'roster':
+            case 'players':
                 let key = (Object.keys(SomeData.info['players'])[0] || '')
                 let keyNew = (Object.keys(SomeData.info['players'][key])[0] || '')
 
                 eventSelectedInfo = {
                     name: SomeData.feature,
                     key: keyNew,
-                    data: SomeData.info['players'][key][keyNew] || 1
+                    data: SomeData.info['players'][key][keyNew] || 0
+                }
+
+                if(eventSelectedInfo) {
+                    eventSelectedInfo.data = 
+                        (typeof eventSelectedInfo.data === 'string') ? 
+                            parseFloat(eventSelectedInfo.data) : 
+                                ((typeof eventSelectedInfo.data === 'number') ? 
+                                    eventSelectedInfo.data : 0)
                 }
                 break
 
@@ -279,7 +294,7 @@ export class GameEventsService extends Processors {
                     name: SomeData.feature,
                     key: keyMe,
                     data: SomeData.info[SomeData.feature].name || 
-                    SomeData.info[SomeData.feature].account_id || 1
+                    SomeData.info[SomeData.feature].account_id || 0
                 }
                 break
         }

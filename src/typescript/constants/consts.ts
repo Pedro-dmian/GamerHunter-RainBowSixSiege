@@ -51,7 +51,7 @@ const indexDB = {
 
 const ChallengeGame = {
   limit: 2,
-  synchronizeAccountRetriesLimit: 5
+  synchronizeAccountRetriesLimit: 40
 }
 
 export {

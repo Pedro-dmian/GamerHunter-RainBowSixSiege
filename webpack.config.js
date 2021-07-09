@@ -84,7 +84,7 @@ module.exports = env => ({
             minify
         }),
         new HtmlWebpackPlugin({
-            title: 'En Juego',
+            title: 'Mostrar / Ocultar Ctrl + F ',
             template: './src/html/in_game.hbs',
             filename: path.resolve(__dirname, './dist/in_game.html'),
             chunks: ['in_game'],

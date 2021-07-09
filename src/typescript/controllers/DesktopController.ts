@@ -41,13 +41,14 @@ export class DesktopController {
 
         new AppWindow(windowNames.desktop)
         new IndexDB().main()
-        new AdsService().runAds(document.getElementById("ad-div"))
-        new AdsService().runAds(document.getElementById('ad-div-responsive'))
+        new AdsService().runAds(document.getElementById("ad-div"), [ { width: 345, height: 500 } ])
         this.main()
     }
 
     private async main() {
         this.UtilsClass = new Utils()
+
+        this.UtilsClass.loaderInWindow(true)
 
         await this.startServices()
 
@@ -72,6 +73,8 @@ export class DesktopController {
         await this.getSliderImages()
         await this.getCoupons()
         await this.getGames()
+
+        this.UtilsClass.loaderInWindow(false)
     }
 
     private eventsDesktop() {
@@ -125,6 +128,11 @@ export class DesktopController {
         this.UtilsClass.submitEvent('signOff', async (event) => {
             this.UtilsClass.disabledButtonAndLoader(event, true, '', '', true)
 
+            CategoryGameService.instance.delete()
+            ChallengesService.instance.delete()
+            UserService.instance.delete()
+
+            // ? Clear LocalStorage SessionStorage
             new Storage().clearAllItems()
             new Storage().clearAllItemsLocalStorage()
 
@@ -266,7 +274,6 @@ export class DesktopController {
                 resolve(true)
             } catch(error) {
                 let message: string = 'No hay imagenes disponibles'
-
                 console.log(message)
 
                 if(alertNotImage) {
@@ -297,8 +304,12 @@ export class DesktopController {
                 resolve(true)
             } catch(error) {
                 let message: string = 'No hay Coupons disponibles'
-                console.error(message)
-                contenteComponentCouponsElement.classList.add('d-none')
+                console.log(message)
+                
+                if(contenteComponentCouponsElement) {
+                    contenteComponentCouponsElement.classList.add('d-none')
+                }
+
                 resolve(false)
             }
         })
@@ -338,7 +349,7 @@ export class DesktopController {
                 console.log('error >>', error)
 
                 let message: string = 'No hay juegos disponibles'
-                console.error(message)
+                console.log(message)
                 contenteComponentElement.classList.add('d-none')
                 resolve(false)
             }

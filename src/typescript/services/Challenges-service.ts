@@ -41,14 +41,27 @@ export class ChallengesService extends Processors {
         return new Promise<IGameChallenge[]>(async (resolve, reject) => {
             try {
                 let gamesChallenges = await (await this.getAPI('get_challenges', 'POST', null, 1)).data || []
+                let savedGamesAll = await this.getGamesAll().toPromise()
 
                 const games: IGameChallenge[] = gamesChallenges.data.games.map((game: IGameChallenge) => {
+                    let savedGames = savedGamesAll.find(item => item.id === game.id)
+
                     let attribute: string = (game.name || '').replace(' ', '')
                     game.overwolf_game_id = GameClassIdObject[attribute]
 
                     if(!game.challenges.error) {
-                        game.challenges.data_challenge_1.info_challenge.amountIHave = 0
-                        game.challenges.data_challenge_2.info_challenge.amountIHave = 0
+                        let amountIHave_1 = 0
+                        let amountIHave_2 = 0
+
+                        if(typeof savedGames !== 'undefined') {
+                            if(!savedGames.challenges.error) {
+                                amountIHave_1 =  savedGames.challenges?.data_challenge_1?.info_challenge?.amountIHave || 0
+                                amountIHave_2 =  savedGames.challenges?.data_challenge_2?.info_challenge?.amountIHave || 0
+                            }
+                        }
+
+                        game.challenges.data_challenge_1.info_challenge.amountIHave = amountIHave_1
+                        game.challenges.data_challenge_2.info_challenge.amountIHave = amountIHave_2
                     }
 
                     return game
@@ -115,6 +128,10 @@ export class ChallengesService extends Processors {
         return IndexDB.instance.getByPrimaryKey(this.objectStore, 'id', id)
     }
 
+    public getGamesAll(): Observable<IGameChallenge[]> {
+        return IndexDB.instance.getAll(this.objectStore)
+    }
+
     public async linkAccount(data: ILinkAccount): Promise<any> {
         return await (await this.getAPI('connect_game', 'POST', data, 1))
     }
@@ -129,5 +146,9 @@ export class ChallengesService extends Processors {
 
     public async completeChallenge(data: { challenge_user_id: number, user_goal: number }): Promise<any> {
         return await (await this.getAPI('complete_challenge', 'POST', data, 1))
+    }
+
+    public async delete() {
+        return await IndexDB.instance.cleanStore(this.objectStore)
     }
 }

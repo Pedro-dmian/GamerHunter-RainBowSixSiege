@@ -50,4 +50,8 @@ export class CategoryGameService extends Processors {
     public async getCategoriesWhereByID(id: number) : Promise<ICategorieGame> {
         return await IndexDB.instance.getDataWhere(this.objectStore, 'id', id).toPromise()
     }
+
+    public async delete() {
+        return await IndexDB.instance.cleanStore(this.objectStore)
+    }
 }

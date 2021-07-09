@@ -60,9 +60,9 @@ class InGame extends AppWindow {
 		
 		this.UtilsClass = new Utils()
 
-		this.user_id = new Storage().getItemLocalStorage(sessionStorage.user).id || 0
+		this.user_id = new Storage().getItemLocalStorage(sessionStorage.user)?.id || 0
 
-		new AdsService().runAds(document.getElementById("ad-div"))
+		new AdsService().runAds(document.getElementById("ad-div"), [ { width: 500, height: 600 } ])
 
 		this._GameEventsListener = new OWGamesEvents({
 			onInfoUpdates: this.onInfoUpdates.bind(this),
@@ -79,6 +79,7 @@ class InGame extends AppWindow {
 	}
 
 	public async run() {
+		this.UtilsClass.loaderInWindow(true)
 		let isloggedIn = UserService.instance.isLoggedIn(document.getElementById('alertPageInGame') || null, document.getElementById('ChallengesBody') || null)
 
 		if(!isloggedIn) {
@@ -92,17 +93,40 @@ class InGame extends AppWindow {
 
 		// ? Eventos Forms
 		this.mainEvents()
+
+		this.UtilsClass.loaderInWindow(false)
 	}
 
 	private mainEvents() {
 		this.formLinkAccount()
-		
+		this.eventPruebas()
+	}
+
+	public eventPruebas() {
+		this.UtilsClass.submitEvent('button-npm', () => {
+			overwolf.windows.setPosition({
+				"relativeTo": {
+					"processName": "success",
+					"windowTitle": "Realizaste un challenger felicidades"
+				},
+				"insertAbove": true,
+				}, 
+				console.log);
+
+			// this.onInfoUpdates({ "players": { "roster": { "score": 300 } } } )
+			// setTimeout(() => {
+			// 	this.onNewEvents({ events: [ { name: 'headshot', data: 1 } ]})
+			// }, 1000);
+		})
 	}
 	
 	private async onInfoUpdates(info) {
-		console.log('info >>', JSON.stringify(info))
+		let key = Object.keys(info)[0]
+		let objectFormatInfo = { info: info, feature: key }
 
-		let eventsWithValues = GameEventsService.instance.rainbowSixSiegeGameEvents(info, false, this.GameInformation.id)
+		console.log('info >>', JSON.stringify(objectFormatInfo))
+
+		let eventsWithValues = GameEventsService.instance.rainbowSixSiegeGameEvents(objectFormatInfo, false, this.GameInformation.id)
 
 		await this.logLine(eventsWithValues, false)
 	}

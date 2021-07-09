@@ -41,23 +41,23 @@ export class ComponentsService extends Processors {
             <button class="widget-3 widget-3-coupon w-100" data-url="${ coupon.url_store }">
                 <div class="card card-custom card-stretch gutter-b bg-gamerhunter-secundary">
                     <div class="card-body d-flex align-items-center py-0 p-0 mt-0">
-                        <img src="${ coupon.image_url }" alt="" class="align-self-center h-200px h-xl-200px">
+                        <img src="${ coupon.image_url }" alt="" class="align-self-center h-150px h-xl-150px">
 
                         <div class="d-flex flex-column flex-grow-1 p-2">
-                            <p class="m-0 mb-2 text-white">
+                            <p class="m-0 mb-2 text-white text-left">
                                 <small>${ coupon.name }</small>
                             </p>
 
-                            <h5 class="font-bold card-title text-white mb-2">DAMAR BEAUTY</h5>
-                            <span class="text-muted">
-                                <small class="d-md-block d-none">
-                                    ${ (coupon.description || '').substr(0, 80) + ((coupon.description) ? '...' : '')  }
+                            <h5 class="font-bold card-title text-white mb-2 text-left">${ (coupon.name_store || '').substr(0, 16) + '...' }</h5>
+                            <span class="text-muted text-left">
+                                <small class="d-md-block d-none text-left">
+                                    ${ (coupon.description || '').substr(0, 50) + ((coupon.description) ? '...' : '')  }
                                 </small>
                                 <small class="d-md-none d-block">
                                     ${ (coupon.description || '').substr(0, 30) + ((coupon.description) ? '...' : '')  }
                                 </small>
                             </span>
-                            <span class="font-bold color-gamerhunter mt-2">${ coupon.date_since_format }</span>
+                            <span class="font-bold color-gamerhunter mt-2 text-left">${ coupon.date_since_format }</span>
                         </div>
                     </div>
                 </div>

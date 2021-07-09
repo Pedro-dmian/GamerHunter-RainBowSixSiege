@@ -52,12 +52,12 @@
         "transparent": true,
         "override_on_update": true,
         "size": {
-          "width": 500,
-          "height": 600
+          "width": 350,
+          "height": 400
         },
         "min_size": {
-          "width": 500,
-          "height": 600
+          "width": 350,
+          "height": 400
         }
       }
     },

@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    {{> ./components/metas }}
     {{> ./components/styles }}
+    {{> ./components/metas }}
 
     <title>Desktop</title>
 
     <script src="https://content.overwolf.com/libs/ads/latest/owads.min.js"></script>
 </head>
-<body>
-    <div class="w-100">
+<body id="body-element" style="overflow-y: hidden;">
+    {{> ./components/loaders }}
+
+    <div class="w-100 header-window">
         {{> ./components/header title=htmlWebpackPlugin.options.title }}
     </div>
 

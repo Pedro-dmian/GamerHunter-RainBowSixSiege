@@ -65,7 +65,9 @@ export class UserService extends Processors {
             }
     
             if(documents.coint) {
-                documents.coint.html(`+ ${user.total_points}` || '+ 0')
+                let point = (user.total_points || 0 ).toFixed(0)
+
+                documents.coint.html(`+ ${point}`)
             }
 
             if(documents.contentUser) {
@@ -117,4 +119,8 @@ export class UserService extends Processors {
 
         return token
 	}
+
+    public async delete() {
+        return await IndexDB.instance.cleanStore(this.objectStore)
+    }
 }

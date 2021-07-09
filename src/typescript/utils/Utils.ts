@@ -175,4 +175,20 @@ export class Utils {
             overwolf.utils.openUrlInDefaultBrowser(url)
         }
     }
+
+    loaderInWindow(loader: boolean = true) {
+        let element: HTMLElement = this.validarExistanceContentElement('loader-content-window')
+        let elementHTML: HTMLElement = this.validarExistanceContentElement('body-element')
+
+        if(!element && !elementHTML) {
+            return
+        }
+
+        if(loader) {
+            element.style.visibility = 'visible'
+        } else {
+            element.style.visibility = 'hidden'
+        }
+
+    }
 }
