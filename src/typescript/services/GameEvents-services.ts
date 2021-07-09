@@ -219,8 +219,6 @@ export class GameEventsService extends Processors {
             data: null
         }
 
-        debugger
-
         switch(SomeData.feature) {
             case 'gep_internal':
                 eventSelectedInfo = {
@@ -267,8 +265,7 @@ export class GameEventsService extends Processors {
                     eventSelectedInfo.data = (typeof eventSelectedInfo.data === 'string') ? parseFloat(eventSelectedInfo.data) : 0
                 }
                 break
-            case 'roster':
-            case 'players':
+            case 'roster' || 'players':
                 let key = (Object.keys(SomeData.info['players'])[0] || '')
                 let keyNew = (Object.keys(SomeData.info['players'][key])[0] || '')
 
