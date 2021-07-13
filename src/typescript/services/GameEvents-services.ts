@@ -260,10 +260,6 @@ export class GameEventsService extends Processors {
                     key: 'score',
                     data: SomeData.info[SomeData.feature].score
                 }
-
-                if(eventSelectedInfo) {
-                    eventSelectedInfo.data = (typeof eventSelectedInfo.data === 'string') ? parseFloat(eventSelectedInfo.data) : 0
-                }
                 break
             case 'roster' || 'players':
                 let key = (Object.keys(SomeData.info['players'])[0] || '')

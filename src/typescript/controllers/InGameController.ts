@@ -62,7 +62,7 @@ class InGame extends AppWindow {
 
 		this.user_id = new Storage().getItemLocalStorage(sessionStorage.user)?.id || 0
 
-		new AdsService().runAds(document.getElementById("ad-div"), [ { width: 500, height: 600 } ])
+		new AdsService().runAds(document.getElementById("ad-div"), [ { width: 350, height: 450 } ])
 
 		this._GameEventsListener = new OWGamesEvents({
 			onInfoUpdates: this.onInfoUpdates.bind(this),
@@ -103,21 +103,29 @@ class InGame extends AppWindow {
 	}
 
 	public eventPruebas() {
-		this.UtilsClass.submitEvent('button-npm', () => {
-			overwolf.windows.setPosition({
-				"relativeTo": {
-					"processName": "success",
-					"windowTitle": "Realizaste un challenger felicidades"
-				},
-				"insertAbove": true,
-				}, 
-				console.log);
-
+		console.log('events')
+		/*this.UtilsClass.submitEvent('button-npm', () => {
+			console.log('entre a la evento')
+			try {
+				overwolf.windows.displayMessageBox({
+					message_title: 'Mensaje de prueba',
+					message_body: 'Body del mensaje',
+					message_box_icon: overwolf.windows.enums.MessagePromptIcon.ExclamationMark,
+					confirm_button_text: 'Accept',
+					cancel_button_text: 'Cancelar'
+				}, (value) => {
+					console.log(value)
+				})
+			} catch(e) {
+				console.log(e)
+			}
+			
+			
 			// this.onInfoUpdates({ "players": { "roster": { "score": 300 } } } )
 			// setTimeout(() => {
 			// 	this.onNewEvents({ events: [ { name: 'headshot', data: 1 } ]})
 			// }, 1000);
-		})
+		})*/
 	}
 	
 	private async onInfoUpdates(info) {

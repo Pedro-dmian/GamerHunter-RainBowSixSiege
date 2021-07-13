@@ -80,6 +80,7 @@ export class ComponentsService extends Processors {
 
         if(!challenges.error && game.exist) {
             // ? Limite de challengers Configurar en el const.ts
+            let classHeightInGame = (inGame) ? 'widget-1-image-in_game' : ''
 
             for (let key = 1; key <= (ChallengeGame.limit || 2); key++) {
                 const ChallengeData: IDataChallenge = challenges['data_challenge_' + key]
@@ -98,7 +99,7 @@ export class ComponentsService extends Processors {
                             
                                         <div class="row">
                                             <div class="col-4 position-relative">
-                                                <div class="widget-1-image">
+                                                <div class="widget-1-image ${classHeightInGame}">
                                                     <span class="widget-1-circle">
                                                         <img src="${ ChallengeData.info_challenge.cat_challenge_game?.cat_type_category_challenge?.api_image_url || './assets/img/not-imagen.jpg' }" alt="">
                                                     </span>
@@ -106,20 +107,20 @@ export class ComponentsService extends Processors {
                                                 </div>
                                             </div>
                                             <div class="col-8 position-relative">
-                                                <div class="d-block mt-5">
+                                                <div class="d-block ${ (inGame) ? 'mt-2' : 'mt-5' }">
                                                     <h6>${ ChallengeData.info_challenge.cat_challenge_game?.name }</h6>
                                                     <p class="mt-2">
                                                         ${ ChallengeData.info_challenge.cat_challenge_game?.description }
                                                     </p>
                                                 </div>
                             
-                                                <div class="d-flex align-items-center w-100 flex-fill mt-lg-8 mt-8">
+                                                <div class="d-flex align-items-center w-100 flex-fill mt-lg-8  ${ (inGame) ? 'mt-0' : 'mt-8' }">
                                                     <div class="progress progress-xs mx-3 w-100">
                                                         <div class="progress-bar bg-gamerhunter" role="progressbar" style="width: ${ percentageCalculate }%;" aria-valuenow="${ percentageCalculate }" aria-valuemin="0" aria-valuemax="100"></div>
                                                     </div>
                                                 </div>
                             
-                                                <div class="row">
+                                                <div class="row  ${ (inGame) ? 'mt-2' : 'mt0' }">
                                                     <div class="col-6 d-flex justify-content-start">
                                                         <span class="font-weight-bolder text-white ml-2">${ ChallengeData.info_challenge.amountIHave || 0 }</span>
                                                     </div>
