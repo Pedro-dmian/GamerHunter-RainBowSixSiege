@@ -16,7 +16,8 @@ import {
     ComponentsService,
     ChallengesService,
     CategoryGameService,
-    AdsService
+    AdsService,
+    ConnectionVerificationService
 } from '../services'
 
 // ? Interfaces
@@ -49,6 +50,8 @@ export class DesktopController {
         this.UtilsClass = new Utils()
 
         this.UtilsClass.loaderInWindow(true)
+
+        window.onload = (e) => ConnectionVerificationService.instance.connectionVerification('connectionAlert')
 
         await this.startServices()
 

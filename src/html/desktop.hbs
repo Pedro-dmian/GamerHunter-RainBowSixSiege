@@ -7,6 +7,7 @@
     <title>Desktop</title>
 
     <script src="https://content.overwolf.com/libs/ads/latest/owads.min.js"></script>
+    <script src="../../public/assets/js/ads-service.js"></script>
 </head>
 <body id="body-element" style="overflow-y: hidden;">
     {{> ./components/loaders }}
@@ -21,6 +22,8 @@
         </aside>
 
         <div id="body">
+            {{> ./components/setting/connectionVerification.hbs }}
+
             {{> ./components/tabs/desktop.hbs }}
             {{> ./components/tabs/challenges.hbs }}
             {{> ./components/tabs/setting.hbs }}

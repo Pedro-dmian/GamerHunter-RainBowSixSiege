@@ -7,7 +7,8 @@ export class AdsService {
     public runAds(element: HTMLElement, space: ISpaceElement[]) {
         try {
             setTimeout(() => {
-                let _owAd: any = new OwAd(element, space)
+                let windowLib: any = window
+                let _owAd: any = new windowLib.OwAd(element, space)
 
                 _owAd.addEventListener('ow_internal_rendered', () => {
                    //  _owAd.refreshAd()
