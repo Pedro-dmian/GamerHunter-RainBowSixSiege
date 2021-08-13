@@ -332,15 +332,23 @@ export class DesktopController {
                 let ChallengerToggleTab: string = ''
 
                 if(gamesChallenges) {
-                    gamesChallenges.forEach((game, index) => {
-                        HTMLGames += ComponentsService.instance.getGameList(game, index)
-
-                        ChallengerToggleTab += ComponentsService.instance.getChallengesGame(game, index)
-
-                        if(index === 0) {
-                            ComponentsService.instance.EnabledFormLinkAccount(game)
-                        }
-                    })
+                    if(gamesChallenges.length >= 0) {
+                        gamesChallenges.forEach((game, index) => {
+                            HTMLGames += ComponentsService.instance.getGameList(game, index)
+    
+                            ChallengerToggleTab += ComponentsService.instance.getChallengesGame(game, index)
+    
+                            if(index === 0) {
+                                ComponentsService.instance.EnabledFormLinkAccount(game)
+                            }
+                        })
+                    } else {
+                        ChallengerToggleTab = `
+                            <div class="alert alert-warning">    
+                                <p class="font-bold p-0 text-center d-block m-0">No hay challenges disponibles</p>
+                            </div>
+                        `
+                    }
 
                     GamesElements.innerHTML = HTMLGames
                     ChallengesElement.innerHTML = ChallengerToggleTab

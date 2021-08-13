@@ -83,16 +83,21 @@ class InGame extends AppWindow {
 		let isloggedIn = UserService.instance.isLoggedIn(document.getElementById('alertPageInGame') || null, document.getElementById('ChallengesBody') || null)
 
 		if(!isloggedIn) {
+
+			this.UtilsClass.loaderInWindow(false)
+
 			return console.warn('No hay un usuario activo')
 		}
 
-		// ? getChallenges
-		await this.getChallenges()
-
-		this._GameEventsListener.start()
-
-		// ? Eventos Forms
-		this.mainEvents()
+		try {
+			// ? getChallenges
+			await this.getChallenges()
+			this._GameEventsListener.start()
+			// ? Eventos Forms
+			this.mainEvents()
+		} catch(error) {
+			console.log(error)
+		}
 
 		this.UtilsClass.loaderInWindow(false)
 	}
@@ -200,6 +205,8 @@ class InGame extends AppWindow {
 
 	private async challengerContentRefresh(overwolf_game_id) {
 		let game = await ChallengesService.instance.getGameByOverwolfID(overwolf_game_id).toPromise()
+
+		console.log(game);
 
 		this.challengerContent(game)
 	}

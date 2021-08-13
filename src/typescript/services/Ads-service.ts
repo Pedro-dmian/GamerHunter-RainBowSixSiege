@@ -11,7 +11,7 @@ export class AdsService {
                 let _owAd: any = new windowLib.OwAd(element, space)
 
                 _owAd.addEventListener('ow_internal_rendered', () => {
-                   //  _owAd.refreshAd()
+                    // _owAd.refreshAd()
                 });
             }, 1000);
         } catch(e) {

@@ -31,7 +31,7 @@ export class ComponentsService extends Processors {
     public getImageHTML(image: IImage): string {
         return `
         <div class="item" style="background-color: ${image.color_right}">
-            <img src="${ image.banner_main }" alt="" class="w-100"/>
+            <img src="${ image.banner_overwolf }" alt="" class="w-100"/>
         </div>`
     }
 

@@ -2,6 +2,7 @@ export interface IImage {
     active: number
     available: number
     banner_main: string
+    banner_overwolf?: string
     capacity_users: number
     color_left: string
     color_right: string
