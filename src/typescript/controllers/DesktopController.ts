@@ -331,6 +331,8 @@ export class DesktopController {
                 let HTMLGames : string = ''
                 let ChallengerToggleTab: string = ''
 
+                console.log('gamesChallenges >> ', gamesChallenges)
+
                 if(gamesChallenges) {
                     if(gamesChallenges.length >= 0) {
                         gamesChallenges.forEach((game, index) => {

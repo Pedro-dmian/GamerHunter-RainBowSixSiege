@@ -180,7 +180,7 @@ class InGame extends AppWindow {
 				if(data_challenge.completChallenge) {
 					GameEventsService.instance.showCongratulations()
 
-					// ? Mandar informacion del challenger
+					// ? Mandar informacion del challenger completado
 					let challengerSeend = await ChallengesService.instance.completeChallenge({ user_goal: this.user_id, challenge_user_id: data.challenge_id })
 
 					if(challengerSeend) {

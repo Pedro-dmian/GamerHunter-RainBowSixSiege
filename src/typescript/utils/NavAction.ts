@@ -6,6 +6,8 @@ import { Storage } from '../utils/Storage'
 import { sessionStorage } from '../constants/consts'
 import { Utils } from '../utils/Utils'
 
+import App from '../app'
+
 export class NavAction {
     private TapAction = ''
 
@@ -31,6 +33,14 @@ export class NavAction {
             this.menuTabActive(Tag)
             this.TabActive(Tag)
         })
+
+        let elementVersion = document.getElementById('versionApp')
+
+        if(elementVersion) {
+            let appVersion = new App()
+
+            elementVersion.innerHTML = `Versión v${ appVersion.VERSION }`
+        }
     }
 
     private menuTabActive(tag: IMenu) {
