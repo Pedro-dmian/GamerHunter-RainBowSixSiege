@@ -1,6 +1,5 @@
-# Sample - TS
-Example-ts is an example app, meant to be used as a reference for developers who are new to Overwolf.
-The app is meant to demonstrate some basic points and flows that are relevant when developing Overwolf apps:
+# Gamer Hunter - RainBowSixSige
+application to earn points by connecting to api Gamer Hunter
 
 - Auto-launch when a game starts.
 - Register to the overwolf.games.events API and receive real time events from the game.
